@@ -4,9 +4,9 @@ import './App.css'
 function App() {
 
   return (
-    <>
-    <h1>teste</h1>
-    </>
+    <div className='bg-'>
+      
+    </div>
   )
 }
 
