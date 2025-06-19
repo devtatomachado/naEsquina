@@ -3,10 +3,12 @@ import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './pages/Home.jsx'
+import Login from './pages/Login.jsx'
 
 const rotas = createBrowserRouter([
   
-  {path:"/", element: <Home/>}
+  {path:"/", element: <Home/>},
+  {path:"/Login", element: <Login/>}
 
 ])
 
