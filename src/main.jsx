@@ -9,8 +9,7 @@ import AdicionarProdutos from './pages/AdicionarProdutos.jsx'
 const rotas = createBrowserRouter([
   
   {path:"/", element: <Home/>},
-  {path:"/Login", element: <Login/>}
-  {path:"/", element: <Home/>},
+  {path:"/Login", element: <Login/>},
   {path:"/adicionar", element: <AdicionarProdutos/>}
 
 ])
