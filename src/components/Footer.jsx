@@ -40,7 +40,7 @@ function Footer() {
                     <li><a href="#" className="text-preto text-sm font-medium hover:underline duration-300 ease-in">Acessibilidade</a></li>
                 </ul>
             </div>
-            <div className="flex flex-col gap-4 hidden md:block">
+            <div className="md:flex flex-col gap-4 hidden">
                 <div className="flex flex-col gap-2">
                     <h3 className="text-roxo text-xl font-bold">Contato</h3>
                     <ul className="flex flex-col gap-2">
