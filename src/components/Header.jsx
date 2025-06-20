@@ -24,7 +24,7 @@ function Header() {
         <header className='w-full flex justify-between py-5 px-12 bg-salmao font-inter'>
             <Link to="/">
                 <img
-                    src="./iconeNaEsquina.svg"
+                    src="../iconeNaEsquina.svg"
                     alt="Icone NaEsquina"
                     className='w-12'
                 />
@@ -50,8 +50,10 @@ function Header() {
                     <button><FiSearch className='text-black/50 text-xl cursor-pointer' /></button>
                 </div>
             </form>
-            {btnMobile && <button onClick={onSearch}><FiSearch className='text-2xl text-roxo block md:hidden' /></button>}
-            {!btnMobile && <button onClick={offSearch}><FaXmark className='text-2xl text-roxo block md:hidden' /></button>}
+            <div className='flex items-center md:hidden'>
+                {btnMobile && <button onClick={onSearch}><FiSearch className='text-2xl text-roxo block md:hidden' /></button>}
+                {!btnMobile && <button onClick={offSearch}><FaXmark className='text-2xl text-roxo block md:hidden' /></button>}
+            </div>
         </header>
     );
 }

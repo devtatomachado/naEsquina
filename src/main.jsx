@@ -6,14 +6,15 @@ import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import AdicionarProdutos from "./pages/AdicionarProdutos.jsx";
 import CadastroPessoa from "./pages/CadastroPessoa.jsx";
+import Loja from "./pages/Loja.jsx";
 
 const rotas = createBrowserRouter([
   { path: "/", element: <Home /> },
   { path: "/login", element: <Login /> },
   { path: "/cadastro", element: <CadastroPessoa /> },
   { path: "/adicionar", element: <AdicionarProdutos /> },
+  {path: "/loja/:lojaID", element: <Loja/>}
 ]);
-
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
