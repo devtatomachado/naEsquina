@@ -8,13 +8,11 @@ import AdicionarProdutos from "./pages/AdicionarProdutos.jsx";
 import CadastroPessoa from "./pages/CadastroPessoa.jsx";
 
 const rotas = createBrowserRouter([
-  
-  {path:"/", element: <Home/>},
-  {path:"/Login", element: <Login/>}
-  {path:"/", element: <Home/>},
-  {path:"/adicionar", element: <AdicionarProdutos/>}
-
-])
+  { path: "/", element: <Home /> },
+  { path: "/Login", element: <Login /> },
+  { path: "/", element: <Home /> },
+  { path: "/adicionar", element: <AdicionarProdutos /> },
+]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
