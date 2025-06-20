@@ -50,8 +50,10 @@ function Header() {
                     <button><FiSearch className='text-black/50 text-xl cursor-pointer' /></button>
                 </div>
             </form>
-            {btnMobile && <button onClick={onSearch}><FiSearch className='text-2xl text-roxo block md:hidden' /></button>}
-            {!btnMobile && <button onClick={offSearch}><FaXmark className='text-2xl text-roxo block md:hidden' /></button>}
+            <div className='flex items-center md:hidden'>
+                {btnMobile && <button onClick={onSearch}><FiSearch className='text-2xl text-roxo block md:hidden' /></button>}
+                {!btnMobile && <button onClick={offSearch}><FaXmark className='text-2xl text-roxo block md:hidden' /></button>}
+            </div>
         </header>
     );
 }

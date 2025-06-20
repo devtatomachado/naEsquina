@@ -14,7 +14,6 @@ const rotas = createBrowserRouter([
   { path: "/adicionar", element: <AdicionarProdutos /> },
 ]);
 
-
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <RouterProvider router={rotas} />
