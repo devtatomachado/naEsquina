@@ -9,8 +9,8 @@ import CadastroPessoa from "./pages/CadastroPessoa.jsx";
 
 const rotas = createBrowserRouter([
   { path: "/", element: <Home /> },
-  { path: "/Login", element: <Login /> },
-  { path: "/", element: <Home /> },
+  { path: "/login", element: <Login /> },
+  { path: "/cadastro", element: <CadastroPessoa /> },
   { path: "/adicionar", element: <AdicionarProdutos /> },
 ]);
 
