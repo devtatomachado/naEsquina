@@ -13,7 +13,7 @@ const rotas = createBrowserRouter([
   { path: "/login", element: <Login /> },
   { path: "/cadastro", element: <CadastroPessoa /> },
   { path: "/adicionar", element: <AdicionarProdutos /> },
-  {path: "/loja", element: <Loja/>}
+  {path: "/loja/:lojaID", element: <Loja/>}
 ]);
 
 createRoot(document.getElementById("root")).render(

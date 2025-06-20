@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 function Loja() {
     const { lojaID } = useParams();
-    const [loja, setLoja] = useState([])
+    const [loja, setLoja] = useState({})
 
     useEffect(() => {
             async function carregaLojas() {
@@ -20,7 +20,7 @@ function Loja() {
                 }
             }
             carregaLojas()
-        }, [])
+        },[lojaID])
     
 
 
