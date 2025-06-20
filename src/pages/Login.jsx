@@ -1,4 +1,36 @@
-function Login() {
+import { useForm } from "react-hook-form";
+import { useNavigate } from 'react-router-dom';
+
+function Login({setLoggedInUser}) {
+    const { register, handleSubmit } = useForm();
+    const navigate = useNavigate();
+
+    async function Entrar(data) {
+        const email = data.email;
+    const senha = data.senha;
+
+    try {
+      const response = await fetch("http://localhost:3000/usuarios"); 
+      const db = await response.json(); 
+      const users = db.usuarios;
+
+      const user = users.find(
+        (u) => u.email === email && u.senha === senha
+      );
+
+       if (user) {
+        alert('Login bem-sucedido!'); 
+        setLoggedInUser(user); 
+        navigate('/');
+      } else {
+        alert('E-mail ou senha incorretos.'); 
+      }
+   
+   } catch (erro) {
+      console.log(`Erro: ${erro.message}`);
+    }
+  }
+
     return (
 
 
@@ -13,7 +45,7 @@ function Login() {
                      <h1 className="text-xl font-semibold mb-4 text-center text-roxo">Seja bem-vindo(a)!</h1>
 
                     <p className="text-sm text-gray-600 mb-6 text-center">Faça login e continue a sua jornada para encontrar produtos incríveis ou para crescer seu negócio local.</p>
-                <form action="">
+                <form onSubmit={handleSubmit(Entrar)} action="">
 
                     <div className="mb-4">
                         <label htmlFor="email" className="sr-only text-roxo">E-mail</label>
@@ -27,8 +59,10 @@ function Login() {
                                 />
                             </span>
                             
-                            <input type="email" id="email" name="email" placeholder="E-mail"
+                            <input type="email" id="email" placeholder="E-mail"
+                                    {...register("email")}
                                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500"/>
+                            
                         </div>
                         </div>
 
@@ -43,17 +77,20 @@ function Login() {
                                     className="h-5 w-5 text-gray-400" 
                                 />
                             </span>
-                            <input type="password" id="password" name="password" placeholder="Senha"
+                            <input type="senha" id="senha" placeholder="Senha"
+                                 {...register("senha")}
                                    className="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500"/>
                             
                         </div>
                         <a href="#" className="text-sm text-black underline hover:underline mt-2 block text-center">Esqueceu a senha?</a>
                     </div>
-                </form>
 
-                        <button className="w-full bg-roxo hover:bg-roxo text-white font-bold py-3 rounded-xl transition duration-200 ease-in-out mb-4">
+                     <button type="submit" className="w-full bg-roxo hover:bg-roxo text-white font-bold py-3 rounded-xl transition duration-200 ease-in-out mb-4">
                     Entrar
                 </button>
+                </form>
+
+                       
 
                 <div className="relative flex items-center py-5">
                     <div className="flex-grow border-t border-roxo"></div>

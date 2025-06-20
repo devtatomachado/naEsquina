@@ -6,7 +6,7 @@ function Footer() {
     return (
         <footer className="flex md:justify-between justify-center bg-salmao py-5 md:px-12 font-inter">
             <div className="flex flex-col gap-8 text-center md:text-left ">
-                <Link to="/"><img src="./logo_footer.svg" alt="Logo NaEsquina" /></Link>
+                <Link to="/"><img src="../logo_footer.svg" alt="Logo NaEsquina" /></Link>
                 <div className="flex flex-col gap-2">
                     <h4 className="text-preto text-xl font-bold">Fique ligado</h4>
                     <ul className="flex gap-2 text-2xl text-roxo justify-center md:justify-start">
