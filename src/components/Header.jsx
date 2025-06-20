@@ -24,7 +24,7 @@ function Header() {
         <header className='w-full flex justify-between py-5 px-12 bg-salmao font-inter'>
             <Link to="/">
                 <img
-                    src="./iconeNaEsquina.svg"
+                    src="../iconeNaEsquina.svg"
                     alt="Icone NaEsquina"
                     className='w-12'
                 />
