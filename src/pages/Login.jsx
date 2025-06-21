@@ -1,35 +1,45 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 
-function Login({setLoggedInUser}) {
+function Login({ setLoggedInUser }) {
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
 
     async function Entrar(data) {
         const email = data.email;
-    const senha = data.senha;
+        const senha = data.password;
 
-    try {
-      const response = await fetch("http://localhost:3000/usuarios"); 
-      const db = await response.json(); 
-      const users = db.usuarios;
+        
 
-      const user = users.find(
-        (u) => u.email === email && u.senha === senha
-      );
+        try {
+            const response = await fetch("http://localhost:3000/usuarios");
 
-       if (user) {
-        alert('Login bem-sucedido!'); 
-        setLoggedInUser(user); 
-        navigate('/');
-      } else {
-        alert('E-mail ou senha incorretos.'); 
-      }
-   
-   } catch (erro) {
-      console.log(`Erro: ${erro.message}`);
+            
+            if (!response.ok) {
+                const errorText = await response.text();
+                
+            }
+            const users = await response.json(); 
+         
+
+            
+            const user = users.find(
+                (u) => u.email === email && u.senha === senha
+            );
+
+            if (user) {
+                alert('Login bem-sucedido!');
+                setLoggedInUser(user);
+                navigate('/');
+            } else {
+                alert('E-mail ou senha incorretos.');
+            }
+
+        } catch (erro) {
+            console.error(`Erro na requisição ou processamento:`, erro);
+            alert('Ocorreu um erro inesperado ao tentar fazer login.');
+        }
     }
-  }
 
     return (
 
@@ -77,6 +87,8 @@ function Login({setLoggedInUser}) {
                                     className="h-5 w-5 text-gray-400" 
                                 />
                             </span>
+                            <input type="password" id="password" placeholder="Senha"
+                                 {...register("password")}
                             <input type="senha" id="senha" placeholder="Senha" required
                                  {...register("senha")}
                                    className="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500"/>
