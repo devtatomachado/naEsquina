@@ -59,7 +59,7 @@ function Login({setLoggedInUser}) {
                                 />
                             </span>
                             
-                            <input type="email" id="email" placeholder="E-mail"
+                            <input type="email" id="email" placeholder="E-mail" required
                                     {...register("email")}
                                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500"/>
                             
@@ -77,7 +77,7 @@ function Login({setLoggedInUser}) {
                                     className="h-5 w-5 text-gray-400" 
                                 />
                             </span>
-                            <input type="senha" id="senha" placeholder="Senha"
+                            <input type="senha" id="senha" placeholder="Senha" required
                                  {...register("senha")}
                                    className="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500"/>
                             
@@ -85,7 +85,7 @@ function Login({setLoggedInUser}) {
                         <a href="#" className="text-sm text-black underline hover:underline mt-2 block text-center">Esqueceu a senha?</a>
                     </div>
 
-                     <button type="submit" className="w-full bg-roxo hover:bg-roxo text-white font-bold py-3 rounded-xl transition duration-200 ease-in-out mb-4">
+                     <button type="submit" className="w-full cursor-pointer bg-roxo hover:bg-roxo text-white font-bold py-3 rounded-xl transition duration-200 ease-in-out mb-4">
                     Entrar
                 </button>
                 </form>
@@ -98,7 +98,7 @@ function Login({setLoggedInUser}) {
                     <div className="flex-grow border-t border-roxo"></div>
                 </div>
 
-                <button className="w-full bg-transparent border border-roxo text-roxo hover:bg-opacity-20 hover:border-black font-bold py-3 rounded-xl">
+                <button className="w-full cursor-pointer bg-transparent border border-roxo text-roxo hover:bg-opacity-20 hover:border-black font-bold py-3 rounded-xl">
                     Cadastre-se
                 </button>
 
