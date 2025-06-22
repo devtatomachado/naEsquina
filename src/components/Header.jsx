@@ -10,24 +10,27 @@ function Header() {
     const [searchMobile, setSearchMobile] = useState("hidden")
     const [btnMobile, setBtnMobile] = useState(true)
 
-    function onSearch(){
+    function onSearch() {
         setSearchMobile("block")
         setBtnMobile(false)
     }
 
-    function offSearch(){
+    function offSearch() {
         setSearchMobile("hidden")
         setBtnMobile(true)
     }
 
     return (
-        <header className='w-full flex justify-between py-5 px-12 bg-salmao font-inter'>
-            <Link to="/">
+        <header className='w-full flex justify-between items-center py-5 px-12 bg-salmao font-inter'>
+            <Link to="/" className='flex items-center gap-2'>
                 <img
                     src="../iconeNaEsquina.svg"
                     alt="Icone NaEsquina"
-                    className='w-12'
+                    className='w-12 '
                 />
+               <div>
+                <h1 className='text-4xl font-bold'><span>Na</span>Esquina</h1>
+               </div>
             </Link>
             <form className='w-[50%] hidden md:block'>
                 <div className='flex justify-between gap-2 bg-branco py-3 px-4 rounded-full'>
