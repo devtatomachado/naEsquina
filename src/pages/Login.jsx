@@ -88,7 +88,7 @@ function Login({ setLoggedInUser }) {
                                 />
                             </span>
                             <input type="password" id="password" placeholder="Senha"
-                                 {...register("password")}
+                                 {...register("password")}/>
                             <input type="senha" id="senha" placeholder="Senha" required
                                  {...register("senha")}
                                    className="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500"/>
