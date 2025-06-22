@@ -28,9 +28,9 @@ function Header() {
                     alt="Icone NaEsquina"
                     className='w-12 '
                 />
-               <div>
-                <h1 className='text-4xl font-bold'><span>Na</span>Esquina</h1>
-               </div>
+               
+                <h1 className='text-4xl text-branco/80 font-bold font-poppins hidden md:block '><span className='text-roxo'>Na</span>Esquina</h1>
+               
             </Link>
             <form className='w-[50%] hidden md:block'>
                 <div className='flex justify-between gap-2 bg-branco py-3 px-4 rounded-full'>

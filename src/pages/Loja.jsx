@@ -1,15 +1,24 @@
 import { useParams } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import CardProduto from "../components/CardProduto";
 import { useEffect, useState } from "react";
-import { FaDove, FaEnvelope, FaFacebook, FaFacebookSquare, FaInstagram, FaMapMarkerAlt, FaPlusCircle, FaWhatsapp } from "react-icons/fa";
-import { FaArrowRight } from "react-icons/fa6";
+import { FaEnvelope, FaFacebookSquare, FaInstagram, FaMapMarkerAlt, FaPlusCircle, FaWhatsapp } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
+import Modal from "react-modal";
+import Swal from "sweetalert2";
+
+Modal.setAppElement('#root');
 
 function Loja() {
     const { lojaID } = useParams();
     const [loja, setLoja] = useState({})
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [produtoSelecionado, setProdutoSelecionado] = useState(null);
+
+    function openProduto(produto) {
+        setProdutoSelecionado(produto);
+        setModalIsOpen(true);
+    }
 
     useEffect(() => {
         async function carregaLojas() {
@@ -28,8 +37,22 @@ function Loja() {
 
 
     const listaProdutos = loja.produtos ? loja.produtos.map(produto => (
-        <CardProduto key={produto.key} produto={produto}/>
+        <div className="flex flex-col bg-salmao/50 w-[300px] h-[552px] rounded-2xl overflow-clip shadow-sm shadow-preto/50">
+            <img src={produto.imagem} alt="" className="w-[300px]" />
+            <div className="p-4 flex flex-col justify-between gap-4 items-end">
+                <h3 className="w-full text-2xl text-roxo font-bold capitalize">{produto.nome}</h3>
+                <p className="text-sm text-justify text-preto ">{produto.descricao.slice(0, 134)}...</p>
+                <div className="w-full flex justify-between items-center ">
+                    {(produto.disponibilidade === "Em estoque") ? <p className="text-roxo text-lg font-semibold">R${produto.valor}</p> : null}
+                    <p className="text-roxo font-semibold bg-branco py-1 px-2 rounded-full">{produto.disponibilidade}</p>
+                </div>
+                <button onClick={() => openProduto(produto)} className="flex justify-end gap-1 items-center text-salmao cursor-pointer"><FaPlusCircle className="text-roxo" /><span className="text-preto font-semibold">Ver mais</span> </button>
+            </div>
+        </div>
     )) : null;
+
+
+
 
     return (
         <>
@@ -69,10 +92,40 @@ function Loja() {
                         <IoLogoWhatsapp className="text-2xl text-[#075e54]" /><p className="text-branco font-semibold text-sm">Fale conosco via Whatsapp</p>
                     </a>
                 </div>
-                <div className="flex-5/6 grid grid-cols-4 gap-y-10 p-6 justify-items-center">
-                        {listaProdutos}
+                <div className="flex-5/6 grid grid-cols-4 gap-y-10 py-12 px-6 justify-items-center">
+                    {listaProdutos}
                 </div>
             </main>
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={() => setModalIsOpen(false)}
+                contentLabel="Detalhes do produto"
+                className="bg-salmao/80 p-8 rounded-lg max-w-[70%] outline-none backdrop-blur-lg"
+                overlayClassName="fixed inset-0 bg-black/50 flex justify-center items-center"
+            >
+                {produtoSelecionado && (
+                    <div className="flex gap-4">
+                        <img src={produtoSelecionado.imagem} alt={produtoSelecionado.nome} className="w-full mb-4" />
+                        <div className="flex flex-col gap-8">
+                            <div>
+                                <h2 className="text-4xl text-roxo font-bold capitalize">{produtoSelecionado.nome}</h2>
+                            </div>
+                            <p className="text-base text-preto">{produtoSelecionado.descricao}</p>
+                            <div className="w-full flex justify-between items-center ">
+                                {(produtoSelecionado.disponibilidade === "Em estoque") ? <p className="text-branco text-xl font-semibold">R${produtoSelecionado.valor}</p> : null}
+
+                                <p className="text-roxo font-semibold bg-branco py-1 px-2 rounded-full">{produtoSelecionado.disponibilidade}</p>
+                            </div>
+                            <button
+                                onClick={() => setModalIsOpen(false)}
+                                className="mt-4 px-4 py-2 bg-roxo text-white rounded cursor-pointer"
+                            >
+                                Fechar
+                            </button>
+                        </div>
+                    </div>
+                )}
+            </Modal>
             <Footer />
         </>
     )
