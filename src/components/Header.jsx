@@ -29,7 +29,7 @@ function Header() {
                     className='w-12 '
                 />
                
-                <h1 className='text-4xl text-branco/80 font-bold font-poppins hidden md:block '><span className='text-roxo'>Na</span>Esquina</h1>
+                <h1 className='text-4xl text-branco/80 font-semibold font-poppins hidden md:block '><span className='text-roxo font-bold'>Na</span>Esquina</h1>
                
             </Link>
             <form className='w-[50%] hidden md:block'>
