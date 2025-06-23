@@ -10,6 +10,8 @@ function Header() {
     const [searchMobile, setSearchMobile] = useState("hidden")
     const [btnMobile, setBtnMobile] = useState(true)
 
+    const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"))
+
     function onSearch() {
         setSearchMobile("block")
         setBtnMobile(false)
@@ -20,6 +22,8 @@ function Header() {
         setBtnMobile(true)
     }
 
+
+    
     return (
         <header className='w-full flex justify-between items-center py-5 px-12 bg-salmao font-inter'>
             <Link to="/" className='flex items-center gap-2'>
@@ -28,9 +32,7 @@ function Header() {
                     alt="Icone NaEsquina"
                     className='w-12 '
                 />
-               
-                <h1 className='text-4xl text-branco/80 font-semibold font-poppins hidden md:block '><span className='text-roxo font-bold'>Na</span>Esquina</h1>
-               
+                <h1 className='text-4xl text-branco/80 font-semibold font-poppins hidden md:block '><span className='text-roxo font-boldn'>Na</span>Esquina</h1>
             </Link>
             <form className='w-[50%] hidden md:block'>
                 <div className='flex justify-between gap-2 bg-branco py-3 px-4 rounded-full'>
@@ -42,7 +44,7 @@ function Header() {
                     <button><FiSearch className='text-black/50 text-xl cursor-pointer' /></button>
                 </div>
             </form>
-            {btnMobile && <Botao text="Entrar" />}
+            {btnMobile && <Link to="/login"><Botao text="Entrar" /></Link>}
             <form className={`${searchMobile} w-[60%]`}>
                 <div className='flex justify-between gap-2 bg-branco py-3 px-4 rounded-full'>
                     <input
@@ -57,6 +59,7 @@ function Header() {
                 {btnMobile && <button onClick={onSearch}><FiSearch className='text-2xl text-roxo block md:hidden' /></button>}
                 {!btnMobile && <button onClick={offSearch}><FaXmark className='text-2xl text-roxo block md:hidden' /></button>}
             </div>
+
         </header>
     );
 }
