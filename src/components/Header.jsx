@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import Botao from './Botao';
@@ -8,20 +8,36 @@ import { FaXmark } from 'react-icons/fa6';
 function Header() {
 
     const [searchMobile, setSearchMobile] = useState("hidden")
-    const [btnMobile, setBtnMobile] = useState(true)
+    // const [btnMobile, setBtnMobile] = useState(true)
+    const [usuarioLogado, setUsuarioLogado] = useState(() => {
+        const user = localStorage.getItem("usuarioLogado")
+        return user ? JSON.parse(user) : null
+    })
 
-    const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"))
+    // function onSearch() {
+    //     setSearchMobile("block")
+    //     setBtnMobile(false)
+    // }
 
-    function onSearch() {
-        setSearchMobile("block")
-        setBtnMobile(false)
+    // function offSearch() {
+    //     setSearchMobile("hidden")
+    //     setBtnMobile(true)
+    // }
+
+    //Esse use Effect atualizar o Header quando o localStorage mudar
+    useEffect(() => {
+        function handleStorage(){
+            const user = localStorage.getItem("usuarioLogado")
+            setUsuarioLogado(user ? JSON.parse(user) : null)
+        }
+        window.addEventListener("storage", handleStorage)
+        return () => window.removeEventListener("storage", handleStorage)
+    }, []);
+
+    function logout(){
+        localStorage.removeItem("usuarioLogado")/
+        setUsuarioLogado(null)
     }
-
-    function offSearch() {
-        setSearchMobile("hidden")
-        setBtnMobile(true)
-    }
-
 
     
     return (
@@ -44,7 +60,17 @@ function Header() {
                     <button><FiSearch className='text-black/50 text-xl cursor-pointer' /></button>
                 </div>
             </form>
-            {btnMobile && <Link to="/login"><Botao text="Entrar" /></Link>}
+            {usuarioLogado ?(
+                <>
+                <button onClick={logout}>Deslogar</button>
+                </>
+            ) : (
+                <>
+
+                <Link to="/login"><Botao text="Entrar" /></Link>
+                </>
+            )
+            }
             <form className={`${searchMobile} w-[60%]`}>
                 <div className='flex justify-between gap-2 bg-branco py-3 px-4 rounded-full'>
                     <input
@@ -55,10 +81,10 @@ function Header() {
                     <button><FiSearch className='text-black/50 text-xl cursor-pointer' /></button>
                 </div>
             </form>
-            <div className='flex items-center md:hidden'>
+            {/* <div className='flex items-center md:hidden'>
                 {btnMobile && <button onClick={onSearch}><FiSearch className='text-2xl text-roxo block md:hidden' /></button>}
                 {!btnMobile && <button onClick={offSearch}><FaXmark className='text-2xl text-roxo block md:hidden' /></button>}
-            </div>
+            </div> */}
 
         </header>
     );
