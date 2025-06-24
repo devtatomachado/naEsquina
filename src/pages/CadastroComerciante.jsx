@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import RadioButton from "../components/RadioButton";
 
 function CadastroPessoa() {
   const { register, handleSubmit } = useForm();
