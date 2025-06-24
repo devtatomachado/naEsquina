@@ -102,11 +102,11 @@ function Loja() {
                 isOpen={modalIsOpen}
                 onRequestClose={() => setModalIsOpen(false)}
                 contentLabel="Detalhes do produto"
-                className="bg-salmao/80 p-8 rounded-lg max-w-[70%] outline-none backdrop-blur-lg"
+                className="bg-salmao/80 p-8 rounded-lg md:max-w-[70%] max-h-screen overflow-auto md:overflow-hidden overflow-x-hidden outline-none backdrop-blur-lg"
                 overlayClassName="fixed inset-0 bg-black/50 flex justify-center items-center"
             >
                 {produtoSelecionado && (
-                    <div className="flex gap-4">
+                    <div className="flex md:flex-row flex-col gap-4">
                         <img src={produtoSelecionado.imagem} alt={produtoSelecionado.nome} className="w-full mb-4" />
                         <div className="flex flex-col gap-8">
                             <div>
