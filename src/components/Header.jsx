@@ -2,30 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import Botao from './Botao';
-import { FaXmark } from 'react-icons/fa6';
+import { FaBars } from 'react-icons/fa6';
 import Menu from './Menu';
+import { RiLoginBoxFill, RiLogoutBoxLine } from 'react-icons/ri';
+import { AiFillHome } from 'react-icons/ai';
+import { FaSign } from 'react-icons/fa';
 
 
 function Header() {
-
-    const [searchMobile, setSearchMobile] = useState("hidden")
-    // const [btnMobile, setBtnMobile] = useState(true)
+    const [menuMobile, setMenuMobile] = useState(false)
     const [usuarioLogado, setUsuarioLogado] = useState(() => {
         const user = localStorage.getItem("usuarioLogado")
         return user ? JSON.parse(user) : null
     })
 
     const isStore = usuarioLogado?.isStore
-
-    // function onSearch() {
-    //     setSearchMobile("block")
-    //     setBtnMobile(false)
-    // }
-
-    // function offSearch() {
-    //     setSearchMobile("hidden")
-    //     setBtnMobile(true)
-    // }
 
     //Esse use Effect atualizar o Header quando o localStorage mudar
     useEffect(() => {
@@ -40,56 +31,71 @@ function Header() {
     function logout() {
         localStorage.removeItem("usuarioLogado")
         setUsuarioLogado(null)
+        setMenuMobile(false)
+    }
+
+    function mobileMenu() {
+        menuMobile ? setMenuMobile(false) : setMenuMobile(true)
     }
 
 
     return (
         <>
-            <header className='w-full flex justify-between items-center py-5 px-12 bg-salmao font-inter'>
+            <header className='w-full flex justify-between items-center py-5 md:px-12 px-6 bg-salmao font-inter'>
                 <Link to="/" className='flex items-center gap-2'>
                     <img
                         src="../iconeNaEsquina.svg"
                         alt="Icone NaEsquina"
                         className='w-12 '
                     />
-                    <h1 className='text-4xl text-branco/80 font-semibold font-poppins hidden md:block '><span className='text-roxo font-boldn'>Na</span>Esquina</h1>
+                    <h1 className='md:text-4xl text-2xl text-branco/80 font-semibold font-poppins '><span className='text-roxo font-boldn'>Na</span>Esquina</h1>
                 </Link>
                 <form className='w-[50%] hidden md:block'>
-                    <div className='flex justify-between gap-2 bg-branco py-3 px-4 rounded-full'>
+                    <div className='flex justify-between items-center gap-3 bg-branco py-3 px-4 rounded-full overflow-clip'>
+                        <Link to="/" className=''><AiFillHome className='text-gray-500 text-xl' /></Link>
                         <input
                             type="text"
                             placeholder='Procurar Lojas'
-                            className='w-full outline-0'
+                            className='w-full outline-0 border-l border-gray-300 pl-3'
                         />
                         <button><FiSearch className='text-black/50 text-xl cursor-pointer' /></button>
                     </div>
                 </form>
                 {usuarioLogado ? (
                     <>
-                        <button onClick={logout}>Deslogar</button>
+                        <button onClick={logout} className='items-center gap-2 bg-bege py-2 px-5 rounded-full cursor-pointer hidden md:flex'>
+                            <RiLogoutBoxLine className='text-roxo text-2xl' />
+                            <p className='font-bold text-preto'>Sair</p>
+                        </button>
                     </>
                 ) : (
                     <>
-
-                        <Link to="/login"><Botao text="Entrar" /></Link>
+                        <Link to="/login" className='md:block hidden'><Botao text="Entrar" /></Link>
                     </>
                 )
                 }
-                <form className={`${searchMobile} w-[60%]`}>
-                    <div className='flex justify-between gap-2 bg-branco py-3 px-4 rounded-full'>
-                        <input
-                            type="text"
-                            placeholder='Procurar'
-                            className='w-full outline-0'
-                        />
-                        <button><FiSearch className='text-black/50 text-xl cursor-pointer' /></button>
-                    </div>
-                </form>
-                {/* <div className='flex items-center md:hidden'>
-                {btnMobile && <button onClick={onSearch}><FiSearch className='text-2xl text-roxo block md:hidden' /></button>}
-                {!btnMobile && <button onClick={offSearch}><FaXmark className='text-2xl text-roxo block md:hidden' /></button>}
-            </div> */}
+                <button className='text-2xl text-roxo' onClick={mobileMenu}><FaBars /></button>
             </header>
+            {menuMobile && (
+                <div className='flex flex-col'>
+                    <nav className='bg-roxo/80 flex justify-around items-center px-6 py-2'>
+                        <Link to="/" className='flex items-center gap-1 text-base text-bege'><AiFillHome className='text-branco text-lg' /> Página inicial</Link>
+                        {usuarioLogado ?
+                            <button onClick={logout} className='flex text-base items-center gap-1 text-bege'><RiLogoutBoxLine className='text-branco text-lg' /> Sair</button>
+                            : <Link to="/login" className='flex text-base items-center gap-1 text-bege'><RiLoginBoxFill className='text-branco text-lg' /> Entrar</Link>}
+                    </nav>
+                    <form className='w-full '>
+                        <div className='flex justify-between items-center gap-3 bg-branco py-3 px-4 rounded-full overflow-clip'>
+                            <input
+                                type="text"
+                                placeholder='Procurar Lojas'
+                                className='w-full outline-0 '
+                            />
+                            <button><FiSearch className='text-black/50 text-xl cursor-pointer' /></button>
+                        </div>
+                    </form>
+                </div>
+            )}
             {isStore && <Menu />}
         </>
     );

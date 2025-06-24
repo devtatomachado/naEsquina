@@ -1,3 +1,6 @@
+import { BsBox, BsBox2 } from "react-icons/bs";
+import { TbLayoutGridAdd } from "react-icons/tb";
+import { Link } from "react-router-dom";
 
 
 function Menu () {
@@ -5,14 +8,14 @@ function Menu () {
         <>
         <nav>
             <ul className="flex justify-center items-center h-[3rem] text-[0.9375rem] gap-5.5 bg-roxo text-white">
-                <div className="flex items-center justify-center gap-1.5">
-                    <img src="./IconeMenu1.svg" alt="" />
-                    <li><a href="">Todos os Produtos</a></li>
-                </div>
-                <div className="flex items-center justify-center gap-1.5">
-                    <img src="./iconeMenu.svg" alt="" />
-                    <li><a href="">Adicionar Produtos</a></li>
-                </div>
+                <Link to="/" className="flex items-center justify-center gap-1.5">
+                    <BsBox2 className="text-xl text-salmao"/>
+                    <p>Todos os Produtos</p>
+                </Link>
+                <Link to="/adicionar" className="flex items-center justify-center gap-1.5">
+                    <TbLayoutGridAdd className="text-2xl text-salmao" />
+                    <p>Adicionar Produtos</p>
+                </Link>
             </ul>
         </nav>
         </>
