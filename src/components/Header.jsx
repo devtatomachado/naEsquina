@@ -6,15 +6,11 @@ import { FaBars } from 'react-icons/fa6';
 import Menu from './Menu';
 import { RiLoginBoxFill, RiLogoutBoxLine } from 'react-icons/ri';
 import { AiFillHome } from 'react-icons/ai';
-import { FaSign } from 'react-icons/fa';
 
 
-function Header() {
+function Header({ setUsuarioLogado }) {
     const [menuMobile, setMenuMobile] = useState(false)
-    const [usuarioLogado, setUsuarioLogado] = useState(() => {
-        const user = localStorage.getItem("usuarioLogado")
-        return user ? JSON.parse(user) : null
-    })
+    const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
 
     const isStore = usuarioLogado?.isStore
 
@@ -30,7 +26,7 @@ function Header() {
 
     function logout() {
         localStorage.removeItem("usuarioLogado")
-        setUsuarioLogado(null)
+        if(setUsuarioLogado) setUsuarioLogado(null)
         setMenuMobile(false)
     }
 
@@ -74,7 +70,7 @@ function Header() {
                     </>
                 )
                 }
-                <button className='text-2xl text-roxo' onClick={mobileMenu}><FaBars /></button>
+                <button className='text-2xl md:hidden block  text-roxo' onClick={mobileMenu}><FaBars /></button>
             </header>
             {menuMobile && (
                 <div className='flex flex-col'>

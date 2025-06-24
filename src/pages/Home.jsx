@@ -9,6 +9,20 @@ function Home() {
 
     const [lojas, setLojas] = useState([]);
 
+    const [usuarioLogado, setUsuarioLogado] = useState(() => {
+        const user = localStorage.getItem("usuarioLogado")
+        return user ? JSON.parse(user) : null
+    })
+
+    useEffect(() => {
+        function handleStorage() {
+            const user = localStorage.getItem("usuarioLogado");
+            setUsuarioLogado(user ? JSON.parse(user) : null);
+        }
+        window.addEventListener("storage", handleStorage);
+        return () => window.removeEventListener("storage", handleStorage);
+    }, []);
+
     useEffect(() => {
         async function carregaLojas() {
             try {
@@ -25,15 +39,15 @@ function Home() {
     }, [])
 
     const listaDeLojas = lojas.map(loja => (
-        <CardLojas key={loja.id} loja={loja} setLoja={setLojas}/>
+        <CardLojas key={loja.id} loja={loja} setLoja={setLojas} />
     ))
 
     return (
         <>
-            <Header />
-            <main className='bg-salmao/40 md:px-12 md:py-16 '>
-                <Banner />
-                <section className='py-10 md:px-0 px-3'>
+            <Header setUsuarioLogado={setUsuarioLogado}/>
+            <main className='bg-salmao/40 md:px-12 md:py-4 '>
+                {usuarioLogado ? <h3 className='text-2xl text-end font-semibold text-roxo'>Olá {usuarioLogado.nome}! Bem-vindo(a) de volta!</h3> : <Banner />}
+                <section className='py-4md:px-0 '>
                     <h2 className='text-roxo text-[2rem] font-bold py-4 '>Principais Lojas</h2>
                     <div className='grid md:grid-cols-3 grid-cols-1 gap-12'>
                         {listaDeLojas}

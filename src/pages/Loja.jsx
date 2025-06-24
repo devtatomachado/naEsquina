@@ -6,6 +6,8 @@ import { FaEnvelope, FaFacebookSquare, FaInstagram, FaMapMarkerAlt, FaPlusCircle
 import { IoLogoWhatsapp } from "react-icons/io";
 import Modal from "react-modal";
 import Swal from "sweetalert2";
+import { RiScrollToBottomLine } from "react-icons/ri";
+import { IoArrowDown } from "react-icons/io5";
 
 Modal.setAppElement('#root');
 
@@ -57,7 +59,7 @@ function Loja() {
     return (
         <>
             <Header />
-            <main className="flex">
+            <main className="flex md:flex-row flex-col">
                 <div className="bg-salmao/60 py-12 px-6 flex flex-col gap-12 flex-1/6">
                     <div className="flex flex-col justify-center items-center gap-10">
                         <img src={loja.logo} alt="Logo loja" className="rounded-full w-44 h-44" />
@@ -70,7 +72,7 @@ function Loja() {
                         </div>
                         <p className="text-justify text-sm">{loja.bio}</p>
                     </div>
-                    <ul className="flex flex-col gap-3">
+                    <ul className="flex items-center md:items-start flex-col  gap-3">
                         <li className="flex items-center gap-2">
                             <FaMapMarkerAlt className="text-xl text-roxo" />
                             <span className="text-base text-preto font-semibold">{loja.endereco}</span>
@@ -92,7 +94,7 @@ function Loja() {
                         <IoLogoWhatsapp className="text-2xl text-[#075e54]" /><p className="text-branco font-semibold text-sm">Fale conosco via Whatsapp</p>
                     </a>
                 </div>
-                <div className="flex-5/6 grid grid-cols-4 gap-y-10 py-12 px-6 justify-items-center">
+                <div className="flex-5/6 grid grid-cols-1 md:grid-cols-4 gap-y-10 py-12 px-6 justify-items-center">
                     {listaProdutos}
                 </div>
             </main>
