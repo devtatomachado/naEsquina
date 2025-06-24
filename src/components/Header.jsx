@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Botao from './Botao';
 import { FaBars } from 'react-icons/fa6';
 import Menu from './Menu';
 import { RiLoginBoxFill, RiLogoutBoxLine } from 'react-icons/ri';
 import { AiFillHome } from 'react-icons/ai';
+import { useForm } from 'react-hook-form';
 
 
 function Header({ setUsuarioLogado }) {
     const [menuMobile, setMenuMobile] = useState(false)
     const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+    const { register, handleSubmit } = useForm();
+    const navigate = useNavigate()
+
+
 
     const isStore = usuarioLogado?.isStore
 
@@ -22,11 +27,11 @@ function Header({ setUsuarioLogado }) {
         }
         window.addEventListener("storage", handleStorage)
         return () => window.removeEventListener("storage", handleStorage)
-    }, []);
+    }, [setUsuarioLogado]);
 
     function logout() {
         localStorage.removeItem("usuarioLogado")
-        if(setUsuarioLogado) setUsuarioLogado(null)
+        if (setUsuarioLogado) setUsuarioLogado(null)
         setMenuMobile(false)
     }
 
@@ -34,6 +39,9 @@ function Header({ setUsuarioLogado }) {
         menuMobile ? setMenuMobile(false) : setMenuMobile(true)
     }
 
+    function pesquisar(data) {
+        navigate(`/pesquisar?termo=${encodeURIComponent(data.pesquisa)}`)
+    }
 
     return (
         <>
@@ -46,15 +54,16 @@ function Header({ setUsuarioLogado }) {
                     />
                     <h1 className='md:text-4xl text-2xl text-branco/80 font-semibold font-poppins '><span className='text-roxo font-boldn'>Na</span>Esquina</h1>
                 </Link>
-                <form className='w-[50%] hidden md:block'>
+                <form className='w-[50%] hidden md:block' onSubmit={handleSubmit(pesquisar)}>
                     <div className='flex justify-between items-center gap-3 bg-branco py-3 px-4 rounded-full overflow-clip'>
                         <Link to="/" className=''><AiFillHome className='text-gray-500 text-xl' /></Link>
                         <input
                             type="text"
                             placeholder='Procurar Lojas'
                             className='w-full outline-0 border-l border-gray-300 pl-3'
+                            {...register("pesquisa")}
                         />
-                        <button><FiSearch className='text-black/50 text-xl cursor-pointer' /></button>
+                        <button type='submit'><FiSearch className='text-black/50 text-xl cursor-pointer' /></button>
                     </div>
                 </form>
                 {usuarioLogado ? (
@@ -80,14 +89,15 @@ function Header({ setUsuarioLogado }) {
                             <button onClick={logout} className='flex text-base items-center gap-1 text-bege'><RiLogoutBoxLine className='text-branco text-lg' /> Sair</button>
                             : <Link to="/login" className='flex text-base items-center gap-1 text-bege'><RiLoginBoxFill className='text-branco text-lg' /> Entrar</Link>}
                     </nav>
-                    <form className='w-full '>
+                    <form className='w-full' onSubmit={handleSubmit(pesquisar)}>
                         <div className='flex justify-between items-center gap-3 bg-branco py-3 px-4 rounded-full overflow-clip'>
                             <input
                                 type="text"
                                 placeholder='Procurar Lojas'
                                 className='w-full outline-0 '
+                                {...register("pesquisa")}
                             />
-                            <button><FiSearch className='text-black/50 text-xl cursor-pointer' /></button>
+                            <button type='submit'><FiSearch className='text-black/50 text-xl cursor-pointer' /></button>
                         </div>
                     </form>
                 </div>

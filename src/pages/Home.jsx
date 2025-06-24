@@ -45,10 +45,10 @@ function Home() {
     return (
         <>
             <Header setUsuarioLogado={setUsuarioLogado}/>
-            <main className='bg-salmao/40 md:px-12 md:py-4 '>
-                {usuarioLogado ? <h3 className='text-2xl text-end font-semibold text-roxo'>Olá {usuarioLogado.nome}! Bem-vindo(a) de volta!</h3> : <Banner />}
-                <section className='py-4md:px-0 '>
-                    <h2 className='text-roxo text-[2rem] font-bold py-4 '>Principais Lojas</h2>
+            <main className='bg-salmao/40 flex flex-col gap-12 md:px-12 md:py-16 pb-16'>
+                {usuarioLogado ? <h3 className='text-2xl text-center font-semibold text-roxo bg-bege py-2 px-2 rounded-md'>Olá {usuarioLogado.nome}! Bem-vindo(a) de volta!</h3> : <Banner />}
+                <section className='flex flex-col gap-3 md:p-0 px-3'>
+                    <h2 className='text-roxo text-[2rem] font-bold '>Principais Lojas</h2>
                     <div className='grid md:grid-cols-3 grid-cols-1 gap-12'>
                         {listaDeLojas}
                     </div>
