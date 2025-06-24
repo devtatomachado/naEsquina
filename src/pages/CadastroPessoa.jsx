@@ -50,7 +50,7 @@ function CadastroPessoa() {
                 id="email"
                 name="email"
                 placeholder="E-mail"
-                className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500" 
                 {...register("email")}
               />
             </div>
@@ -70,7 +70,7 @@ function CadastroPessoa() {
                 id="password"
                 name="password"
                 placeholder="Senha"
-                className="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500" 
                 {...register("senha")}
               />
             </div>
@@ -95,7 +95,7 @@ function CadastroPessoa() {
             </div>
           </div>
         </form>
-        <button className="bg-roxo w-full border border-roxo text-white hover:bg-opacity-20 hover:border-black font-bold py-3 rounded-xl">
+        <button className="bg-roxo w-full border border-roxo text-white hover:bg-opacity-20 hover:border-black font-bold py-3 rounded-xl cursor-pointer">
           Continuar
         </button>
 

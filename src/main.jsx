@@ -5,12 +5,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import AdicionarProdutos from "./pages/AdicionarProdutos.jsx";
-//import Cadastro from "./components/RadioButton.jsx";
-//import CadastroPessoa from "./pages/CadastroPessoa.jsx";
-//import CadastroComerciante from "./pages/CadastroComerciante.jsx";
 import Loja from "./pages/Loja.jsx";
-import Cadastro from "./pages/Cadastro.jsx";
 import TesteCadastro from "./pages/TesteCadastro.jsx";
+import Pesquisar from "./pages/Pesquisar.jsx";
 
 const rotas = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -18,6 +15,7 @@ const rotas = createBrowserRouter([
   { path: "/cadastro", element: <TesteCadastro /> },
   { path: "/adicionar", element: <AdicionarProdutos /> },
   { path: "/loja/:lojaID", element: <Loja /> },
+  { path: "/pesquisar", element: <Pesquisar /> },
 ]);
 
 createRoot(document.getElementById("root")).render(
