@@ -64,9 +64,11 @@ function Login() {
                             Entrar
                         </button>
                         <hr className="border-roxo" />
-                        <button className="w-full cursor-pointer bg-transparent border border-roxo text-roxo hover:bg-opacity-20 hover:border-black font-bold py-3 rounded-xl">
+                        <Link to="/cadastro" 
+                            className="w-full flex justify-center cursor-pointer bg-transparent border border-roxo text-roxo hover:bg-opacity-20 hover:border-black font-bold py-3 rounded-xl"
+                        >
                             Cadastre-se
-                        </button>
+                        </Link>
                         <Link to="/" className="flex items-center justify-center gap-2"><p className="text-sm text-roxo underline underline-offset-2">Voltar</p></Link>
                     </div>
                 </form>
