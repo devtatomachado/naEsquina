@@ -8,7 +8,7 @@ function Banner() {
                 <h1 className='text-salmao text-2xl md:text-4xl font-bold text-center md:text-left '>Multiplique sua visibilidade com o <span className='text-branco'>NaEsquina</span></h1>
                 <h2 className='text-branco text-xl font-light w-full md:block hidden'>Divulgue com facilidade em uma plataforma poderosa e intuitiva</h2>
             </div>
-            <Link to="/"><p className='bg-salmao py-3 px-10 rounded-xl text-roxo font-bold hover:brightness-110 duration-300 ease-in-out text-base'>Cadastre-se</p></Link>
+            <Link to="/"><p className='bg-salmao py-3 px-5  md:text-sm rounded-xl text-roxo font-bold hover:brightness-110 duration-300 ease-in-out '>Cadastre-se</p></Link>
         </section>
     )
 }
