@@ -7,7 +7,46 @@ function Cadastro() {
 
   async function cadastra(data) {
     console.log(data);
-    // seu fetch aqui
+    const nome = data.nome;
+    let endereco = data.endereco;
+    let documento = data.documento;
+    const email = data.email;
+    const senha = data.senha;
+    let isStore = false;
+    const confirma = data.confirma;
+
+    if (documento.length == 0) {
+      if (senha != confirma) {
+        alert("As senhas devem ser iguais");
+        return;
+      } else {
+        endereco = "";
+        documento = "";
+        isStore = false;
+      }
+    } else {
+      isStore = true;
+    }
+
+    try {
+      const resposta = await fetch("http://localhost:3000/usuarios", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nome,
+          endereco,
+          documento,
+          email,
+          senha,
+          isStore,
+        }),
+      });
+      if (!resposta.ok) throw new Error("Erro ao cadastrar");
+      const novoCadastro = await resposta.json();
+      alert(`Ok! jogo Cadastrado com Código: ${novoCadastro.id}`);
+    } catch (erro) {
+      console.log(`Erro: ${erro.massage}`);
+    }
   }
 
   return (
