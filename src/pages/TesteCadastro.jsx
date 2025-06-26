@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Cadastro() {
   const { register, handleSubmit } = useForm();
@@ -150,10 +151,11 @@ function Cadastro() {
 
         <a
           href="#"
-          className="text-sm text-black underline hover:underline mt-2 block text-center"
+          className="text-sm text-preto underline hover:underline mt-2 block text-center"
         >
           Já tem cadastro? Entre
         </a>
+          
       </div>
     </div>
   );
