@@ -73,7 +73,7 @@ function AdicionarProdutos() {
             <Header/>
             <main className='px-[2.94rem] bg-[rgba(239,164,139,0.39)] pt-[3.75rem] pb-[3.75rem]'>
                 
-                <div className='flex md:ml-8.5 justify-center items-center bg-salmao w-[17.375rem] mb-[2.5rem]  h-[3.5625rem] gap-[0.625rem] rounded-tr-[0.9375rem] rounded-br-[0.9375rem] border-l-[10px] border-l-[var(--Roxo,#685369)]'>
+                <div className='flex md:ml-8.5 justify-center items-center bg-salmao w-[17.375rem] mb-[2.5rem]  h-[3.5625rem] gap-[0.625rem] rounded-r-2xl border-l-[10px] border-l-[var(--Roxo,#685369)]'>
                     <img src="./iconeprodutoroxo.svg" alt="" />
                     <h3 className='text-roxo text-[1.375rem] font-bold'>Adicionar Produtos</h3>
                 </div>
