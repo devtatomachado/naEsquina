@@ -54,7 +54,9 @@ function EditarLoja() {
                     })
                 })
                 if (!resposta) throw new Error("Erro ao salvar altarações!")
-                Swal.fire("Salvo!", "Produto adicionado com sucesso.", "success");
+                await Swal.fire("Salvo!", "Produto adicionado com sucesso.", "success");
+                navigate("/")
+                
             } 
 
         } catch (e) {
