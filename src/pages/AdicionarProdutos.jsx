@@ -1,6 +1,5 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Menu from '../components/Menu';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 
@@ -9,38 +8,62 @@ function AdicionarProdutos() {
     const { register, handleSubmit, reset } = useForm();
 
     const onSubmit = async (dados) => {
-     try {
-       const result = await Swal.fire({
-       title: "Você tem certeza que quer salvar as alterações?",
-       showDenyButton: true,
-       showCancelButton: true,
-       confirmButtonText: "Salvar",
-       denyButtonText: `Não salvar`,
+  try {
+    const lojaId = localStorage.getItem("lojaIdLogada");
+
+    if (!lojaId) {
+      Swal.fire("Erro", "Nenhuma loja está logada. Faça login para continuar.", "error");
+      return;
+    }
+
+    const result = await Swal.fire({
+      title: "Você tem certeza que quer salvar o produto?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Salvar",
+      denyButtonText: `Não salvar`,
     });
 
     if (result.isConfirmed) {
-        const response = await fetch('http://localhost:3000/produtos', {
-        method: 'POST',
+      const lojaResponse = await fetch(`http://localhost:3000/lojas/${lojaId}`);
+      const lojaData = await lojaResponse.json();
+
+      const novoProduto = {
+        id: Date.now(), 
+        nome: dados.nome,
+        imagem: dados.imagem,
+        descricao: dados.descricao,
+        valor: dados.valor,
+        disponibilidade: "Em estoque" 
+      };
+
+      
+      const produtosAtualizados = [...(lojaData.produtos || []), novoProduto];
+
+
+      
+      const updateResponse = await fetch(`http://localhost:3000/lojas/${lojaId}`, {
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(dados),
+        body: JSON.stringify({ ...lojaData, produtos: produtosAtualizados })
       });
 
-      if (!response.ok) throw new Error('Erro ao cadastrar');
+      if (!updateResponse.ok) throw new Error('Erro ao salvar produto');
 
-      reset();
+      reset(); 
 
       Swal.fire("Salvo!", "Produto adicionado com sucesso.", "success");
-        } else if (result.isDenied) {
-      Swal.fire("Alterações não foram salvas", "", "info");
-        }
 
-        } catch (err) {
-          console.error(err);
-        Swal.fire({
-        icon: 'error',
-        title: 'Erro ao cadastrar',
-        text: 'Tente novamente mais tarde.',
-        confirmButtonColor: '#d33'
+    } else if (result.isDenied) {
+      Swal.fire("Produto não foi salvo", "", "info");
+    }
+
+  } catch (err) {
+    console.error(err);
+    Swal.fire({
+      icon: 'error',
+      title: 'Erro ao cadastrar',
+      text: 'Tente novamente mais tarde.',
     });
   }
 };
@@ -67,8 +90,8 @@ function AdicionarProdutos() {
                             <div className='flex items-center gap-1.5 bg-bege border border-salmao rounded-[0.625rem] h-[3.375rem] px-[0.625rem] w-full'>
                                 <img src="./iconeprecoproduto.svg" alt="" />
                                 <input className='placeholder-roxo text-roxo outline-none' type="text"
-                                id="produto"
-                                placeholder= 'Preço do Produto' {...register("produto")} required/>
+                                id="valor"
+                                placeholder= 'Preço do Produto' {...register("valor")} required/>
                             </div>
                         </div>
                         <div className='flex items-center gap-1.5 bg-bege border border-salmao rounded-[0.625rem] h-[3.375rem] px-[0.625rem] w-full'>
