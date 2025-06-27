@@ -19,7 +19,7 @@ function Loja() {
 
     const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
     const isStore = usuarioLogado?.isStore
-
+    const isDono = usuarioLogado && loja.UsuarioId === usuarioLogado.id;
 
     function openProduto(produto) {
         setProdutoSelecionado(produto);
@@ -77,7 +77,7 @@ function Loja() {
                 </div>
                 <button onClick={() => openProduto(produto)} className="flex justify-end gap-1 items-center text-salmao cursor-pointer"><FaPlusCircle className="text-roxo" /><span className="text-preto font-semibold">Ver mais</span> </button>
             </div>
-            {isStore && (
+            {isDono && (
                 <div className="flex justify-between items-center">
                     <a href="" className="flex justify-center items-center w-[50%] bg-roxo p-2">
                         <FaEdit className="text-branco text-base" />
