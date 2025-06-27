@@ -18,6 +18,11 @@ function Login() {
         if (usuarios.length > 0 && usuarios[0].senha === senha) {
             const usuarioLogado = usuarios[0];
             localStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado))
+            if(usuarioLogado.isStore && usuarioLogado.lojaId) {
+                localStorage.setItem("lojaIdLogada", usuarioLogado.lojaId)
+            } else {
+                localStorage.removeItem("lojaIdLogada")
+            }
             navigate("/")
         } else {
             alert("email ou senha inválidos")

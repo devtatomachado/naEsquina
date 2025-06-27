@@ -40,12 +40,14 @@ function Loja() {
 
     const listaProdutos = loja.produtos ? loja.produtos.map(produto => (
         <div className="flex flex-col bg-salmao/50 w-[300px] h-[552px] rounded-2xl overflow-clip shadow-sm shadow-preto/50">
-            <img src={produto.imagem} alt="" className="w-[300px]" />
-            <div className="p-4 flex flex-col justify-between gap-4 items-end">
+            <div className="h-[300px] overflow-clip flex items-center">
+                <img src={produto.imagem} alt="" className="w-[300px] h-[300px]" />
+            </div>
+            <div className="p-4 h-full flex flex-col justify-between gap-4 ">
                 <h3 className="w-full text-2xl text-roxo font-bold capitalize">{produto.nome}</h3>
-                <p className="text-sm text-justify text-preto ">{produto.descricao.slice(0, 134)}...</p>
-                <div className="w-full flex justify-between items-center ">
-                    {(produto.disponibilidade === "Em estoque") ? <p className="text-roxo text-lg font-semibold">R${produto.valor}</p> : null}
+                <p className="text-sm text-left text-preto h-full wrap-break-word">{produto.descricao.slice(0, 134)}...</p>
+                <div className="w-full flex justify-between items-center capitalize ">
+                    {(produto.disponibilidade === "Em estoque") ? <p className="text-roxo text-lg font-semibold">{Number(produto.valor).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p> : null}
                     <p className="text-roxo font-semibold bg-branco py-1 px-2 rounded-full">{produto.disponibilidade}</p>
                 </div>
                 <button onClick={() => openProduto(produto)} className="flex justify-end gap-1 items-center text-salmao cursor-pointer"><FaPlusCircle className="text-roxo" /><span className="text-preto font-semibold">Ver mais</span> </button>
@@ -94,7 +96,7 @@ function Loja() {
                         <IoLogoWhatsapp className="text-2xl text-[#075e54]" /><p className="text-branco font-semibold text-sm">Fale conosco via Whatsapp</p>
                     </a>
                 </div>
-                <div className="flex-5/6 grid grid-cols-1 md:grid-cols-4 gap-y-10 py-12 px-6 justify-items-center">
+                <div className="flex-5/6 grid grid-cols-1 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 gap-y-10 py-12 px-6 justify-items-center">
                     {listaProdutos}
                 </div>
             </main>
@@ -106,8 +108,8 @@ function Loja() {
                 overlayClassName="fixed inset-0 bg-black/50 flex justify-center items-center"
             >
                 {produtoSelecionado && (
-                    <div className="flex md:flex-row flex-col gap-4">
-                        <img src={produtoSelecionado.imagem} alt={produtoSelecionado.nome} className="w-full mb-4" />
+                    <div className="flex lg:flex-row flex-col gap-4">
+                        <img src={produtoSelecionado.imagem} alt={produtoSelecionado.nome} className="w-full md:w-1/2 mb-4" />
                         <div className="flex flex-col gap-8">
                             <div>
                                 <h2 className="text-4xl text-roxo font-bold capitalize">{produtoSelecionado.nome}</h2>
