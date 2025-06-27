@@ -7,7 +7,7 @@ function CardLojas({ loja }) {
                 <img src={loja.logo} alt="" className='w-[9rem] h-[9rem] rounded-xl border border-salmao' />
                 <div className='flex items-center md:items-start md:justify-between md:flex-col px-2'>
                     <h3 className='text-roxo text-xl font-bold'>{loja.nome}</h3>
-                    <p className='hidden md:block line-clamp-1 text-preto text-sm text-justify '><span className="line-clamp-4">{loja.bio}</span></p>
+                    <p className='hidden md:block line-clamp-1 text-preto text-sm '><span className="line-clamp-4">{loja.bio}</span></p>
                 </div>
             </div>
             <Link to={`/loja/${loja.id}`}>

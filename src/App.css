@@ -17,12 +17,3 @@
 body {
     font-family: Inter;
 }
-
-/* Esconde a barra de rolagem no Chrome, Safari e Edge */
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-/* Esconde a barra de rolagem no Firefox */
-.hide-scrollbar {
-  scrollbar-width: none;
-}
