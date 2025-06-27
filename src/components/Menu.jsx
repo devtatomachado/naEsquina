@@ -1,5 +1,6 @@
 import { BsBox, BsBox2 } from "react-icons/bs";
 import { FaEdit } from "react-icons/fa";
+import { RiStore2Line } from "react-icons/ri";
 import { TbLayoutGridAdd } from "react-icons/tb";
 import { Link } from "react-router-dom";
 
@@ -13,8 +14,8 @@ function Menu () {
         <nav>
             <ul className="flex justify-center items-center h-[3rem] text-[0.9375rem] gap-5.5 bg-roxo text-white">
                 <Link to={`/loja/${usuarioLogado.lojaId}`} className="flex items-center justify-center gap-1.5">
-                    <BsBox2 className="text-xl text-salmao"/>
-                    <p>Todos os Produtos</p>
+                    <RiStore2Line className="text-xl text-salmao"/>
+                    <p>Minha Loja</p>
                 </Link>
                 <Link to="/adicionar" className="flex items-center justify-center gap-1.5">
                     <TbLayoutGridAdd className="text-2xl text-salmao" />

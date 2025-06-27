@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
-import { FaEnvelope, FaFacebookSquare, FaInstagram, FaMapMarkerAlt, FaPlusCircle, FaWhatsapp } from "react-icons/fa";
+import { FaEdit, FaEnvelope, FaFacebookSquare, FaInstagram, FaMapMarkerAlt, FaPlusCircle, FaTrash, FaWhatsapp } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import Modal from "react-modal";
 import Swal from "sweetalert2";
@@ -16,6 +16,10 @@ function Loja() {
     const [loja, setLoja] = useState({})
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [produtoSelecionado, setProdutoSelecionado] = useState(null);
+
+    const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+    const isStore = usuarioLogado?.isStore
+
 
     function openProduto(produto) {
         setProdutoSelecionado(produto);
@@ -37,9 +41,30 @@ function Loja() {
         carregaLojas()
     }, [lojaID])
 
+    async function deleteProduto(produtoId){
+        try{
+            const produtosAtualizados = loja.produtos.filter(produto => produto.id !== produtoId)
+
+            const resposta = await fetch(`http://localhost:3000/lojas/${lojaID}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    ...loja,
+                    produtos: produtosAtualizados
+                })
+            }) 
+            if(!resposta) throw new Error("Erro ao deletar produto")
+            setLoja({...loja, produtos: produtosAtualizados})
+
+            Swal.fire("Deletado!", "Produto removido com sucesso", "sucess")
+        } catch(e) {
+            Swal.fire("Erro", e.message, "error")
+        } 
+    }
+
 
     const listaProdutos = loja.produtos ? loja.produtos.map(produto => (
-        <div className="flex flex-col bg-salmao/50 w-[300px] h-[552px] rounded-2xl overflow-clip shadow-sm shadow-preto/50">
+        <div className="flex flex-col bg-salmao/50 w-[300px] h-[592px] rounded-2xl overflow-clip shadow-sm shadow-preto/50">
             <div className="h-[300px] overflow-clip flex items-center">
                 <img src={produto.imagem} alt="" className="w-[300px] h-[300px]" />
             </div>
@@ -52,6 +77,16 @@ function Loja() {
                 </div>
                 <button onClick={() => openProduto(produto)} className="flex justify-end gap-1 items-center text-salmao cursor-pointer"><FaPlusCircle className="text-roxo" /><span className="text-preto font-semibold">Ver mais</span> </button>
             </div>
+            {isStore && (
+                <div className="flex justify-between items-center">
+                    <a href="" className="flex justify-center items-center w-[50%] bg-roxo p-2">
+                        <FaEdit className="text-branco text-base" />
+                    </a>
+                    <button onClick={() => deleteProduto(produto.id)} className="flex justify-center items-center w-[50%] bg-red-400 p-2 cursor-pointer">
+                        <FaTrash className="text-branco text-base" />
+                    </button>
+                </div>
+            )}
         </div>
     )) : null;
 
