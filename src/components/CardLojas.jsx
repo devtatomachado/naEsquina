@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 function CardLojas({ loja }) {
     return (
-        <div className='bg-branco  flex flex-col gap-3 rounded-2xl shadow-sm shadow-preto/50 overflow-clip'>
-            <div className="flex p-6">
+        <div className='bg-branco  flex flex-col rounded-2xl shadow-sm shadow-preto/50 overflow-clip'>
+            <div className="flex gap-3 p-6">
                 <img src={loja.logo} alt="" className='w-[9rem] h-[9rem] rounded-xl border border-salmao' />
                 <div className='flex items-center md:items-start md:justify-between md:flex-col px-2'>
                     <h3 className='text-roxo text-xl font-bold'>{loja.nome}</h3>
