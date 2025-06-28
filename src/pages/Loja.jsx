@@ -8,6 +8,7 @@ import Modal from "react-modal";
 import Swal from "sweetalert2";
 import { RiScrollToBottomLine } from "react-icons/ri";
 import { IoArrowDown } from "react-icons/io5";
+import { BiSolidEdit } from "react-icons/bi";
 
 Modal.setAppElement('#root');
 
@@ -18,7 +19,6 @@ function Loja() {
     const [produtoSelecionado, setProdutoSelecionado] = useState(null);
 
     const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
-    const isStore = usuarioLogado?.isStore
     const isDono = usuarioLogado && loja.UsuarioId === usuarioLogado.id;
 
     function openProduto(produto) {
@@ -41,25 +41,45 @@ function Loja() {
         carregaLojas()
     }, [lojaID])
 
-    async function deleteProduto(produtoId){
-        try{
-            const produtosAtualizados = loja.produtos.filter(produto => produto.id !== produtoId)
+    async function deleteProduto(produtoId) {
+        try {
 
-            const resposta = await fetch(`http://localhost:3000/lojas/${lojaID}`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    ...loja,
-                    produtos: produtosAtualizados
+            const result = await Swal.fire({
+                title: "Você tem certeza?",
+                text: "Você irá deletar esse item permanentemente!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Deletar"
+            })
+
+            if (result.isConfirmed) {
+                const produtosAtualizados = loja.produtos.filter(produto => produto.id !== produtoId)
+                const resposta = await fetch(`http://localhost:3000/lojas/${lojaID}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        ...loja,
+                        produtos: produtosAtualizados
+                    })
                 })
-            }) 
-            if(!resposta) throw new Error("Erro ao deletar produto")
-            setLoja({...loja, produtos: produtosAtualizados})
+                if (!resposta) throw new Error("Erro ao deletar produto")
+                setLoja({ ...loja, produtos: produtosAtualizados })
+                Swal.fire("Deletado!", "Produto removido com sucesso", "sucess")
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+            }
 
-            Swal.fire("Deletado!", "Produto removido com sucesso", "sucess")
-        } catch(e) {
+
+
+
+        } catch (e) {
             Swal.fire("Erro", e.message, "error")
-        } 
+        }
     }
 
 
@@ -80,10 +100,10 @@ function Loja() {
             {isDono && (
                 <div className="flex justify-between items-center">
                     <a href="" className="flex justify-center items-center w-[50%] bg-roxo p-2">
-                        <FaEdit className="text-branco text-base" />
+                        <BiSolidEdit className="text-branco text-base" />
                     </a>
                     <button onClick={() => deleteProduto(produto.id)} className="flex justify-center items-center w-[50%] bg-red-400 p-2 cursor-pointer">
-                        <FaTrash className="text-branco text-base" />
+                        <FaTrash className="text-branco text-base" /> 
                     </button>
                 </div>
             )}

@@ -123,7 +123,7 @@ function AdicionarProdutos() {
               <p className='text-roxo font-semibold'>Disponibilidade:</p>
               <div className='flex gap-5 items-center'>
                 <div className='flex gap-2 items-center'>
-                  <input type="radio" id="estoque" value="estoque" {...register("disponibilidade")} className='accent-roxo cursor-pointer' />
+                  <input type="radio" id="estoque" value="Em estoque" {...register("disponibilidade")} className='accent-roxo cursor-pointer' />
                   <label htmlFor="estoque" className='text-lg font-medium text-roxo cursor-pointer'>Estoque</label>
                 </div>
                 <div className='flex gap-2 items-center'>
