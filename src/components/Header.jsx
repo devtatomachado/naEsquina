@@ -33,6 +33,7 @@ function Header({ setUsuarioLogado }) {
         localStorage.removeItem("usuarioLogado")
         if (setUsuarioLogado) setUsuarioLogado(null)
         setMenuMobile(false)
+        navigate("/")
     }
 
     function mobileMenu() {

@@ -17,7 +17,15 @@ function Login() {
 
         if (usuarios.length > 0 && usuarios[0].senha === senha) {
             const usuarioLogado = usuarios[0];
-            localStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado))
+            localStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado));
+            const favoritosIds = usuarioLogado.favoritos?.map(fav => String(fav.lojaid)) || [];
+            localStorage.setItem("favoritosIds", JSON.stringify(favoritosIds));
+
+            if (usuarioLogado.isStore && usuarioLogado.lojaId) {
+                localStorage.setItem("lojaIdLogada", usuarioLogado.lojaId)
+            } else {
+                localStorage.removeItem("lojaIdLogada")
+            }
             navigate("/")
         } else {
             alert("email ou senha inválidos")
@@ -64,7 +72,7 @@ function Login() {
                             Entrar
                         </button>
                         <hr className="border-roxo" />
-                        <Link to="/cadastro" 
+                        <Link to="/cadastro"
                             className="w-full flex justify-center cursor-pointer bg-transparent border border-roxo text-roxo hover:bg-opacity-20 hover:border-black font-bold py-3 rounded-xl"
                         >
                             Cadastre-se
