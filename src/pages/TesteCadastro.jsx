@@ -1,27 +1,26 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { MdPerson } from "react-icons/md";
+import { LuMapPin } from "react-icons/lu";
+import { GrDocumentUser } from "react-icons/gr";
+import { TfiEmail } from "react-icons/tfi";
+import { IoLockClosedOutline } from "react-icons/io5";
+import Input from "../components/Input";
 
 function Cadastro() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const [telaAtiva, setTelaAtiva] = useState("comerciante");
 
   async function cadastra(data) {
-    console.log(data);
-    const nome = data.nome;
-    let endereco = data.endereco;
-    let documento = data.documento;
-    const email = data.email;
-    const senha = data.senha;
+    const { nome, endereco, documento, email, senha, confirma } = data;
     let isStore = false;
-    const confirma = data.confirma;
 
-    if (documento.length == 0) {
-      if (senha != confirma) {
+    if (documento.length === 0) {
+      if (senha !== confirma) {
         alert("As senhas devem ser iguais");
         return;
       } else {
-        endereco = "";
-        documento = "";
+        reset();
         isStore = false;
       }
     } else {
@@ -34,24 +33,24 @@ function Cadastro() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           nome,
-          endereco,
-          documento,
+          endereco: endereco || "",
+          documento: documento || "",
           email,
           senha,
           isStore,
         }),
       });
       if (!resposta.ok) throw new Error("Erro ao cadastrar");
-      const novoCadastro = await resposta.json();
-      alert(`Ok! jogo Cadastrado com Código: ${novoCadastro.id}`);
+
+      alert(`Ok!Cadastrado feito com sucesso:`);
     } catch (erro) {
-      console.log(`Erro: ${erro.massage}`);
+      console.log(`Erro: ${erro.message}`);
     }
   }
 
   return (
-    <div className="bg-[url('/bg_Login.png')] bg-cover bg-center bg-fixed min-h-screen flex items-center justify-center">
-      <div className="bg-white bg-opacity-90 p-10 rounded-lg shadow-xl w-96 max-w-lg">
+    <div className="bg-[url('/bg_Login.png')] bg-cover bg-center bg-fixed min-h-screen flex items-center justify-center px-4">
+      <div className="bg-white bg-opacity-90 p-6 sm:p-10 rounded-lg shadow-xl w-full max-w-md">
         <div className="text-center mb-6">
           <img
             src="/logoNaesquina.svg"
@@ -59,13 +58,16 @@ function Cadastro() {
             className="mx-auto h-20 mb-4"
           />
 
-          <div className="flex justify-center space-x-6">
+          <div className="flex flex-col sm:flex-row justify-center items-center sm:space-x-6 space-y-2 sm:space-y-0">
             <label className="flex items-center space-x-2">
               <input
                 type="radio"
                 value="comerciante"
                 checked={telaAtiva === "comerciante"}
-                onChange={(e) => setTelaAtiva(e.target.value)}
+                onChange={(e) => {
+                  setTelaAtiva(e.target.value);
+                  reset(); // limpa os campos
+                }}
                 className="accent-purple-700"
               />
               <span>Comerciante</span>
@@ -76,7 +78,10 @@ function Cadastro() {
                 type="radio"
                 value="pessoa"
                 checked={telaAtiva === "pessoa"}
-                onChange={(e) => setTelaAtiva(e.target.value)}
+                onChange={(e) => {
+                  setTelaAtiva(e.target.value);
+                  reset(); // limpa os campos
+                }}
                 className="accent-purple-700"
               />
               <span>Consumidor</span>
@@ -89,26 +94,36 @@ function Cadastro() {
             <>
               <Input
                 type="text"
-                placeholder="Nome da loja"
+                placeholder="Nome"
                 register={register}
                 name="nome"
-                icon="/BsEnvelope.svg"
+                icon={<MdPerson />}
               />
               <Input
                 type="text"
                 placeholder="Endereço"
                 register={register}
                 name="endereco"
-                icon="/BsEnvelope.svg"
+                icon={<LuMapPin />}
               />
               <Input
                 type="text"
                 placeholder="CPF/CNPJ"
                 register={register}
                 name="documento"
-                icon="/BsEnvelope.svg"
+                icon={<GrDocumentUser />}
               />
             </>
+          )}
+
+          {telaAtiva === "pessoa" && (
+            <Input
+              type="text"
+              placeholder="Nome"
+              register={register}
+              name="nome"
+              icon={<MdPerson />}
+            />
           )}
 
           <Input
@@ -116,14 +131,14 @@ function Cadastro() {
             placeholder="E-mail"
             register={register}
             name="email"
-            icon="/BsEnvelope.svg"
+            icon={<TfiEmail />}
           />
           <Input
             type="password"
             placeholder="Senha"
             register={register}
             name="senha"
-            icon="/BiLockAlt.svg"
+            icon={<IoLockClosedOutline />}
           />
 
           {telaAtiva === "pessoa" && (
@@ -132,15 +147,15 @@ function Cadastro() {
               placeholder="Confirmar Senha"
               register={register}
               name="confirma"
-              icon="/BiLockAlt.svg"
+              icon={<IoLockClosedOutline />}
             />
           )}
 
           <button
             type="submit"
-            className="bg-roxo w-full border border-roxo text-white hover:bg-opacity-20 hover:border-black font-bold py-3 rounded-xl mt-4"
+            className="bg-roxo w-full border border-roxo text-white hover:bg-opacity-20 hover:border-black font-bold py-2 sm:py-3 rounded-xl mt-4 text-sm sm:text-base"
           >
-            {telaAtiva === "comerciante" ? "Continuar" : "Cadastrar"}
+            Cadastrar
           </button>
         </form>
 
@@ -150,28 +165,10 @@ function Cadastro() {
 
         <a
           href="#"
-          className="text-sm text-black underline hover:underline mt-2 block text-center"
+          className="text-sm sm:text-base text-black underline hover:underline mt-2 block text-center"
         >
           Já tem cadastro? Entre
         </a>
-      </div>
-    </div>
-  );
-}
-
-function Input({ type, placeholder, register, name, icon }) {
-  return (
-    <div className="mb-4">
-      <div className="relative">
-        <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-          <img src={icon} alt="" className="h-5 w-5 text-gray-400" />
-        </span>
-        <input
-          type={type}
-          placeholder={placeholder}
-          className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500"
-          {...register(name)}
-        />
       </div>
     </div>
   );
