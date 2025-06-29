@@ -80,35 +80,38 @@ function AdicionarProdutos() {
       <Header />
       <main className='flex flex-col gap-12 md:px-12 py-8 md:py-8 pb-16 bg-salmao/40'>
         <div className='flex justify-start items-center bg-salmao px-4 w-[17.375rem] h-[3.5625rem] gap-[0.625rem] rounded-r-2xl border-l-[10px] border-l-[var(--Roxo,#685369)]'>
-          <TbLayoutGridAdd  className="text-3xl text-roxo"/>
+          <TbLayoutGridAdd className="text-3xl text-roxo" />
           <h3 className='text-roxo text-xl font-bold'>Adicionar Produtos</h3>
         </div>
         <div className='flex justify-center mx-3 md:mx-0'>
           <form onSubmit={handleSubmit(onSubmit)} className='w-full md:w-[60%] grid grid-cols-1 md:grid-cols-2 md:gap-y-4 md:gap-x-8 gap-y-3' action="">
-              <InputLoja
-                label="Nome do Produto"
-                nome="nome"
-                icon={FiBox}
-                register={register}
-                type="text"
-                className="col-span-1"
-              />
-              <InputLoja
-                label="Preço do Produto"
-                nome="valor"
-                icon={BiMoneyWithdraw}
-                register={register}
-                type="number"
-                className="col-span-1"
-                min="1"
-                step="0.5"
-              />
+            <InputLoja
+              label="Nome do Produto"
+              nome="nome"
+              icon={FiBox}
+              register={register}
+              type="text"
+              autocomplete="off"
+              className="col-span-1"
+            />
+            <InputLoja
+              label="Preço do Produto"
+              nome="valor"
+              icon={BiMoneyWithdraw}
+              register={register}
+              type="number"
+              className="col-span-1"
+              min="1"
+              autocomplete="off"
+              step="0.5"
+            />
             <InputLoja
               label="Imagem do Produto"
               nome="imagem"
               icon={MdAddPhotoAlternate}
               register={register}
               type="text"
+              autocomplete="off"
               className="col-span-1 md:col-span-2"
             />
             <textarea
@@ -125,7 +128,7 @@ function AdicionarProdutos() {
                   <label htmlFor="estoque" className='text-lg font-medium text-roxo cursor-pointer'>Estoque</label>
                 </div>
                 <div className='flex gap-2 items-center'>
-                  <input type="radio" id="encomenda" value="encomenda" {...register("disponibilidade")} className='accent-roxo cursor-pointer'/>
+                  <input type="radio" id="encomenda" value="encomenda" {...register("disponibilidade")} className='accent-roxo cursor-pointer' />
                   <label htmlFor="encomenda" className='text-lg font-medium text-roxo cursor-pointer'>Encomenda</label>
                 </div>
               </div>

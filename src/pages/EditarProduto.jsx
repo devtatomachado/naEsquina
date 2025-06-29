@@ -83,6 +83,7 @@ function EditarProduto() {
                             register={register}
                             type="text"
                             className="col-span-2"
+                            autocomplete="off"
                         />
                         <InputLoja
                             label="Preço do Produto"
@@ -93,6 +94,7 @@ function EditarProduto() {
                             className="col-span-2"
                             min="1"
                             step="0.5"
+                            autocomplete="off"
                         />
                         <InputLoja
                             label="Imagem do Produto"
@@ -101,6 +103,7 @@ function EditarProduto() {
                             register={register}
                             type="text"
                             className="col-span-2"
+                            autocomplete="off"
                         />
                         <textarea
                             className="w-full h-[200px] bg-bege flex items-start gap-2 p-3 rounded-lg border border-salmao text-roxo font-medium text-base outline-0 resize-none col-span-2"

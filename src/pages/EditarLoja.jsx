@@ -80,6 +80,7 @@ function EditarLoja() {
                             icon={FaStore}
                             register={register}
                             type="text"
+                            autocomplete="off"
                             className="md:col-span-2"
                         />
                         <InputLoja
@@ -88,6 +89,7 @@ function EditarLoja() {
                             icon={FaMapMarkerAlt}
                             register={register}
                             type="text"
+                            autocomplete="off"
                             className="md:col-span-2"
                         />
                         <InputLoja
@@ -96,6 +98,7 @@ function EditarLoja() {
                             icon={FaImage}
                             register={register}
                             type="text"
+                            autocomplete="off"
                             className="md:col-span-2"
                         />
                         <InputLoja
@@ -103,6 +106,7 @@ function EditarLoja() {
                             nome="telefone"
                             icon={FaPhoneAlt}
                             register={register}
+                            autocomplete="off"
                             type="text"
                         />
                         <InputLoja
@@ -110,6 +114,7 @@ function EditarLoja() {
                             nome="email"
                             icon={FaEnvelope}
                             register={register}
+                            autocomplete="off"
                             type="email"
                         />
                         <label htmlFor="bio" className="sr-only">descrição</label>

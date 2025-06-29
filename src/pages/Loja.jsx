@@ -34,6 +34,11 @@ function Loja() {
                 if (!resposta.ok) throw new Error("Erro ao carregar as lojas!")
                 const dados = await resposta.json()
                 setLoja(dados)
+
+                if (!dados.nomeLoja || dados.nomeLoja.trim() === "" || !dados.bio || dados.bio.trim() === "") {
+                await Swal.fire("Complete sua loja!", "Preencha as informações da loja para continuar.", "info");
+                navigate("/editarloja");
+            }
             } catch (e) {
                 console.error('Erro: ', e.message)
             }
@@ -90,8 +95,8 @@ function Loja() {
                 <img src={produto.imagem} alt="" className="w-[300px] h-[300px]" />
             </div>
             <div className="p-4 h-full flex flex-col justify-between gap-4 ">
-                <h3 className="w-full text-2xl text-roxo font-bold capitalize">{produto.nome}</h3>
-                <p className="text-sm text-justify text-preto h-full wrap-break-word">{produto.descricao.slice(0, 110)}...</p>
+                <h3 className="w-full text-xl text-roxo font-bold capitalize">{produto.nome.length > 26 ? produto.nome.slice(0,26) + "..." : produto.nome}</h3>
+                <p className="text-sm text-justify text-preto h-full wrap-break-word">{produto.descricao.length > 110 ? produto.descricao.slice(0, 110) + "..." : produto.descricao}</p>
                 <div className="w-full flex justify-between items-center capitalize ">
                     {(produto.disponibilidade === "Em estoque") ? <p className="text-roxo text-lg font-semibold">{Number(produto.valor).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p> : null}
                     <p className="text-roxo font-semibold bg-branco py-1 px-2 rounded-full">{produto.disponibilidade}</p>
@@ -208,12 +213,14 @@ function Loja() {
                 isOpen={modalIsOpen}
                 onRequestClose={() => setModalIsOpen(false)}
                 contentLabel="Detalhes do produto"
-                className="bg-salmao/80 p-8 rounded-lg md:max-w-[70%] max-h-screen overflow-auto md:overflow-hidden overflow-x-hidden outline-none backdrop-blur-lg"
+                className="bg-salmao/80 p-8 rounded-lg md:w-[800px] max-h-screen overflow-auto md:overflow-hidden overflow-x-hidden outline-none backdrop-blur-lg"
                 overlayClassName="fixed inset-0 bg-black/50 flex justify-center items-center"
             >
                 {produtoSelecionado && (
-                    <div className="flex lg:flex-row flex-col gap-4">
-                        <img src={produtoSelecionado.imagem} alt={produtoSelecionado.nome} className="w-full md:w-1/2" />
+                    <div className="flex justify-evenly lg:flex-row flex-col gap-4">
+                        <div className="w-[300px] h-[300px] flex items-center justify-center overflow-clip border-2 border-bege rounded-md">
+                            <img src={produtoSelecionado.imagem} alt={produtoSelecionado.nome} className="w-[300px] h-[300px] object-cover object-center" />
+                        </div>
                         <div className="flex flex-col gap-8 justify-between">
                             <div>
                                 <h2 className="text-4xl text-roxo font-bold capitalize">{produtoSelecionado.nome}</h2>

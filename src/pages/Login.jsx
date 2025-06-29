@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Swal from "sweetalert2";
 
 function Login() {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
 
     async function fazerLogin(data) {
@@ -29,13 +29,13 @@ function Login() {
             }
             navigate("/")
         } else {
-            Swal.fire({text: "Email ou senha inválidos", icon:"warning"})
+            Swal.fire({ text: "Email ou senha inválidos", icon: "warning" })
         }
     }
 
     return (
         <div className="bg-[url('/bg_Login.png')] bg-cover bg-center bg-fixed min-h-screen flex items-center justify-center">
-            <div className="bg-branco bg-opacity-90 p-8 rounded-lg shadow-xl max-w-full md:max-w-sm w-[95%] flex flex-col gap-12 py-12">
+            <div className="bg-branco bg-opacity-90 p-8 rounded-lg shadow-xl max-w-full md:max-w-sm w-[95%] flex flex-col gap-12 py-12 relative">
                 <div className="flex flex-col gap-3">
                     <img src='/logoNaesquina.svg' alt="" className="mx-auto h-20" />
                     <h1 className="text-xl font-semibold text-center text-roxo">Seja bem-vindo(a)!</h1>
@@ -44,15 +44,16 @@ function Login() {
                 <form onSubmit={handleSubmit(fazerLogin)} className="flex flex-col gap-4">
                     <label htmlFor="email" className="sr-only">Email</label>
                     <div className="flex flex-col gap-3">
-                        <div className={`flex items-center gap-2 border border-roxo/50 rounded-xl py-2 px-3  ${errors.email ? "outline-red-400" : ""}`}>
+                        <div className={`flex items-center gap-2 border border-roxo/50 rounded-xl py-2 px-3`}>
                             <BsEnvelope className="text-roxo text-lg" />
                             <input
                                 type="email"
                                 id="email"
                                 placeholder="E-mail"
                                 className="text-roxo placeholder:text-roxo outline-0"
-                                {...register("email", {required: true})}
+                                {...register("email", { required: true })}
                                 autoComplete="off"
+                                required
                             />
                         </div>
                         <label htmlFor="password" className="sr-only">Senha</label>
@@ -63,11 +64,14 @@ function Login() {
                                 id="password"
                                 placeholder="Senha"
                                 className={`text-roxo placeholder:text-roxo outline-0`}
-                                {...register("senha")}
+                                {...register("senha", { required: true })}
                                 autoComplete="off"
+                                required
                             />
                         </div>
+
                     </div>
+
                     <a href="" className="text-sm font-light text-center underline underline-offset-2 decoration-1">Esqueceu a senha?</a>
                     <div className="flex flex-col gap-5">
                         <button type="submit" className="w-full cursor-pointer bg-roxo hover:bg-roxo text-white font-bold py-3 rounded-xl transition duration-200 ease-in-out">
@@ -82,7 +86,6 @@ function Login() {
                         <Link to="/" className="flex items-center justify-center gap-2"><p className="text-sm text-roxo underline underline-offset-2">Voltar para Página Inicial</p></Link>
                     </div>
                 </form>
-
             </div>
         </div>
     );
