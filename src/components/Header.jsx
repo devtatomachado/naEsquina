@@ -15,8 +15,6 @@ function Header({ setUsuarioLogado }) {
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate()
 
-
-
     const isStore = usuarioLogado?.isStore
 
     //Esse use Effect atualizar o Header quando o localStorage mudar
@@ -63,6 +61,7 @@ function Header({ setUsuarioLogado }) {
                             placeholder='Procurar Lojas'
                             className='w-full outline-0 border-l border-gray-300 pl-3'
                             {...register("pesquisa")}
+                            autoComplete='off'
                         />
                         <button type='submit'><FiSearch className='text-black/50 text-xl cursor-pointer' /></button>
                     </div>
@@ -97,6 +96,7 @@ function Header({ setUsuarioLogado }) {
                                 placeholder='Procurar Lojas'
                                 className='w-full outline-0 '
                                 {...register("pesquisa")}
+                                autoComplete='off'
                             />
                             <button type='submit'><FiSearch className='text-black/50 text-xl cursor-pointer' /></button>
                         </div>

@@ -1,14 +1,12 @@
-function InputCadastro({ type, placeholder, register, name, icon, ...rest }) {
+function InputCadastro({ type, placeholder, register, name, icon: Icon, ...rest }) {
   return (
     <div className="mb-4">
-      <div className="relative">
-        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-xl text-gray-400">
-          {icon}
-        </span>
+      <div className="flex items-center gap-2 border border-roxo/50 rounded-xl py-2 px-3">
+        {Icon && <Icon className="text-roxo text-lg"/>}
         <input
           type={type}
           placeholder={placeholder}
-          className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500"
+           className="text-roxo placeholder:text-roxo outline-0"
           {...register(name)}
           {...rest}
         />

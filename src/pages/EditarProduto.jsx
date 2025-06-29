@@ -61,41 +61,39 @@ function EditarProduto() {
         }
     }
 
-    function cancel(){
+    function cancel() {
         navigate(`/loja/${lojaId}`)
     }
 
     return (
         <>
             <Header />
-            <main className='px-[2.94rem] bg-[rgba(239,164,139,0.39)] pt-[3.75rem] pb-[3.75rem]'>
-                <div className='flex md:ml-8.5 justify-center items-center bg-salmao w-[17.375rem] mb-[2.5rem]  h-[3.5625rem] gap-[0.625rem] rounded-r-2xl border-l-[10px] border-l-[var(--Roxo,#685369)]'>
-                    <BiSolidEdit className="text-[1.375rem] text-roxo" />
-                    <h3 className='text-roxo text-[1.375rem] font-bold'>Editar Produtos</h3>
+            <main className='flex flex-col gap-12 md:px-12 py-8 md:py-8 pb-16 bg-salmao/40'>
+                <div className='flex justify-start items-center bg-salmao px-4 w-[17.375rem] h-[3.5625rem] gap-[0.625rem] rounded-r-2xl border-l-[10px] border-l-[var(--Roxo,#685369)]'>
+                    <BiSolidEdit className="text-3xl text-roxo" />
+                    <h3 className='text-roxo text-xl font-bold'>Editar Produtos</h3>
                 </div>
-                <div className='md:flex md:justify-center md:items-center md:w-full'>
+                <div className='md:flex md:justify-center mx-3 md:items-center md:w-full'>
 
-                    <form onSubmit={handleSubmit(salvarAlteracoes)} className='flex flex-col md:gap-[2.2rem] md:justify-center md:w-[69rem] gap-[0.62rem]' action="">
-                        <div className='flex flex-col md:flex-row space-y-[0.62rem] md:space-y-0 md:gap-[2.62rem]'>
-                            <InputLoja
-                                label="Nome do Produto"
-                                nome="nome"
-                                icon={FiBox}
-                                register={register}
-                                type="text"
-                                className="col-span-2"
-                            />
-                            <InputLoja
-                                label="Preço do Produto"
-                                nome="valor"
-                                icon={BiMoneyWithdraw}
-                                register={register}
-                                type="number"
-                                className="col-span-2"
-                                min="1"
-                                step="0.5"
-                            />
-                        </div>
+                    <form onSubmit={handleSubmit(salvarAlteracoes)} className='w-full md:w-[60%] grid grid-cols-1 md:grid-cols-2 md:gap-y-4 md:gap-x-8 gap-y-3' action="">
+                        <InputLoja
+                            label="Nome do Produto"
+                            nome="nome"
+                            icon={FiBox}
+                            register={register}
+                            type="text"
+                            className="col-span-2"
+                        />
+                        <InputLoja
+                            label="Preço do Produto"
+                            nome="valor"
+                            icon={BiMoneyWithdraw}
+                            register={register}
+                            type="number"
+                            className="col-span-2"
+                            min="1"
+                            step="0.5"
+                        />
                         <InputLoja
                             label="Imagem do Produto"
                             nome="imagem"

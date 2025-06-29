@@ -67,20 +67,20 @@ function EditarLoja() {
     return (
         <>
             <Header />
-            <main className="flex flex-col gap-12  md:px-12 py-8 md:py-8 pb-16 bg-salmao/40">
+            <main className='flex flex-col gap-12 md:px-12 py-8 md:py-8 pb-16 bg-salmao/40'>
                 <div className='flex justify-start items-center bg-salmao px-4 w-[17.375rem] h-[3.5625rem] gap-[0.625rem] rounded-r-2xl border-l-[10px] border-l-[var(--Roxo,#685369)]'>
                     <FaEdit className="text-2xl text-roxo" />
-                    <h3 className='text-roxo text-[1.375rem] font-bold'>Editar Loja</h3>
+                    <h3 className='text-roxo text-xl font-bold'>Editar Loja</h3>
                 </div>
                 <div className="flex justify-center mx-3 md:mx-0">
-                    <form onSubmit={handleSubmit(salvarAlteracoes)} className="w-[60%] grid grid-cols-2 gap-y-4 gap-x-8">
+                    <form onSubmit={handleSubmit(salvarAlteracoes)} className='w-full md:w-[60%] grid grid-cols-1 md:grid-cols-2 md:gap-y-4 md:gap-x-8 gap-y-3'>
                         <InputLoja
                             label="Nome da Loja"
                             nome="nomeLoja"
                             icon={FaStore}
                             register={register}
                             type="text"
-                            className="col-span-2"
+                            className="md:col-span-2"
                         />
                         <InputLoja
                             label="Endereço"
@@ -88,7 +88,7 @@ function EditarLoja() {
                             icon={FaMapMarkerAlt}
                             register={register}
                             type="text"
-                            className="col-span-2"
+                            className="md:col-span-2"
                         />
                         <InputLoja
                             label="Link da imagem"
@@ -96,7 +96,7 @@ function EditarLoja() {
                             icon={FaImage}
                             register={register}
                             type="text"
-                            className="col-span-2"
+                            className="md:col-span-2"
                         />
                         <InputLoja
                             label="Telefone"
@@ -118,9 +118,9 @@ function EditarLoja() {
                             {...register("bio")}
                             placeholder="Descrição da Loja"
                             minLength={150}
-                            className="w-full h-[200px] bg-bege flex items-start gap-2 p-3 rounded-lg border border-salmao text-roxo font-medium text-base outline-0 resize-none col-span-2"
+                            className="w-full h-[200px] bg-bege flex items-start gap-2 p-3 rounded-lg border border-salmao text-roxo font-medium text-base outline-0 resize-none md:col-span-2"
                         />
-                        <div className='flex flex-col col-span-2 md:flex-row md:gap-9 mt-[0.62rem] gap-[0.62rem] mb-[2.5rem]'>
+                        <div className='flex flex-col md:col-span-2 md:flex-row md:gap-9 mt-[0.62rem] gap-[0.62rem] mb-[2.5rem]'>
                             <button type="submit" className='bg-salmao cursor-pointer text-roxo font-bold text-[1.25rem] rounded-2xl h-[3.375rem] w-full'>
                                 Salvar
                             </button>

@@ -34,7 +34,6 @@ function Loja() {
                 if (!resposta.ok) throw new Error("Erro ao carregar as lojas!")
                 const dados = await resposta.json()
                 setLoja(dados)
-                console.log(dados)
             } catch (e) {
                 console.error('Erro: ', e.message)
             }
@@ -83,6 +82,7 @@ function Loja() {
         }
     }
 
+    
 
     const listaProdutos = loja.produtos ? loja.produtos.map(produto => (
         <div className="flex flex-col bg-salmao/50 w-[300px] h-[592px] rounded-2xl overflow-clip shadow-sm shadow-preto/50">
@@ -91,7 +91,7 @@ function Loja() {
             </div>
             <div className="p-4 h-full flex flex-col justify-between gap-4 ">
                 <h3 className="w-full text-2xl text-roxo font-bold capitalize">{produto.nome}</h3>
-                <p className="text-sm text-justify text-preto h-full wrap-break-word">{produto.descricao.slice(0, 134)}...</p>
+                <p className="text-sm text-justify text-preto h-full wrap-break-word">{produto.descricao.slice(0, 110)}...</p>
                 <div className="w-full flex justify-between items-center capitalize ">
                     {(produto.disponibilidade === "Em estoque") ? <p className="text-roxo text-lg font-semibold">{Number(produto.valor).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p> : null}
                     <p className="text-roxo font-semibold bg-branco py-1 px-2 rounded-full">{produto.disponibilidade}</p>
@@ -159,7 +159,7 @@ function Loja() {
                     <div className="flex flex-col justify-center items-center gap-10">
                         <img src={loja.logo} alt="Logo loja" className="rounded-full w-44 h-44 object-cover" />
                         <div className="flex flex-col gap-2">
-                            <h2 className=" text-2xl font-bold text-roxo text-center">{loja.nome}</h2>
+                            <h2 className=" text-2xl font-bold text-roxo text-center">{loja.nomeLoja}</h2>
                             <ul className="w-full flex gap-2 justify-center">
                                 <li className="text-2xl text-preto hover:text-roxo duration-500 ease-in"><a href=""><FaInstagram /></a></li>
                                 <li className="text-2xl text-preto hover:text-roxo duration-500 ease-in"><a href=""><FaFacebookSquare /></a></li>

@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Swal from "sweetalert2";
 
 function Login() {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
 
     async function fazerLogin(data) {
@@ -33,7 +33,6 @@ function Login() {
         }
     }
 
-
     return (
         <div className="bg-[url('/bg_Login.png')] bg-cover bg-center bg-fixed min-h-screen flex items-center justify-center">
             <div className="bg-branco bg-opacity-90 p-8 rounded-lg shadow-xl max-w-full md:max-w-sm w-[95%] flex flex-col gap-12 py-12">
@@ -45,14 +44,15 @@ function Login() {
                 <form onSubmit={handleSubmit(fazerLogin)} className="flex flex-col gap-4">
                     <label htmlFor="email" className="sr-only">Email</label>
                     <div className="flex flex-col gap-3">
-                        <div className="flex items-center gap-2 border border-roxo/50 rounded-xl py-2 px-3">
+                        <div className={`flex items-center gap-2 border border-roxo/50 rounded-xl py-2 px-3  ${errors.email ? "outline-red-400" : ""}`}>
                             <BsEnvelope className="text-roxo text-lg" />
                             <input
                                 type="email"
                                 id="email"
                                 placeholder="E-mail"
                                 className="text-roxo placeholder:text-roxo outline-0"
-                                {...register("email")}
+                                {...register("email", {required: true})}
+                                autoComplete="off"
                             />
                         </div>
                         <label htmlFor="password" className="sr-only">Senha</label>
@@ -62,8 +62,9 @@ function Login() {
                                 type="password"
                                 id="password"
                                 placeholder="Senha"
-                                className="text-roxo placeholder:text-roxo outline-0"
+                                className={`text-roxo placeholder:text-roxo outline-0`}
                                 {...register("senha")}
+                                autoComplete="off"
                             />
                         </div>
                     </div>

@@ -9,6 +9,7 @@ import { FiBox } from 'react-icons/fi';
 import { BiMoneyWithdraw } from 'react-icons/bi';
 import { MdAddPhotoAlternate } from 'react-icons/md';
 import { BsCardText } from 'react-icons/bs';
+import { TbLayoutGridAdd } from 'react-icons/tb';
 
 function AdicionarProdutos() {
   const { register, handleSubmit, reset } = useForm();
@@ -77,22 +78,20 @@ function AdicionarProdutos() {
   return (
     <>
       <Header />
-      <main className='px-[2.94rem] bg-[rgba(239,164,139,0.39)] pt-[3.75rem] pb-[3.75rem]'>
-        <div className='flex md:ml-8.5 justify-center items-center bg-salmao w-[17.375rem] mb-[2.5rem]  h-[3.5625rem] gap-[0.625rem] rounded-r-2xl border-l-[10px] border-l-[var(--Roxo,#685369)]'>
-          <img src="./iconeprodutoroxo.svg" alt="" />
-          <h3 className='text-roxo text-[1.375rem] font-bold'>Adicionar Produtos</h3>
+      <main className='flex flex-col gap-12 md:px-12 py-8 md:py-8 pb-16 bg-salmao/40'>
+        <div className='flex justify-start items-center bg-salmao px-4 w-[17.375rem] h-[3.5625rem] gap-[0.625rem] rounded-r-2xl border-l-[10px] border-l-[var(--Roxo,#685369)]'>
+          <TbLayoutGridAdd  className="text-3xl text-roxo"/>
+          <h3 className='text-roxo text-xl font-bold'>Adicionar Produtos</h3>
         </div>
-        <div className='md:flex md:justify-center md:items-center md:w-full'>
-
-          <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col md:gap-[2.2rem] md:justify-center md:w-[69rem] gap-[0.62rem]' action="">
-            <div className='flex flex-col md:flex-row space-y-[0.62rem] md:space-y-0 md:gap-[2.62rem]'>
+        <div className='flex justify-center mx-3 md:mx-0'>
+          <form onSubmit={handleSubmit(onSubmit)} className='w-full md:w-[60%] grid grid-cols-1 md:grid-cols-2 md:gap-y-4 md:gap-x-8 gap-y-3' action="">
               <InputLoja
                 label="Nome do Produto"
                 nome="nome"
                 icon={FiBox}
                 register={register}
                 type="text"
-                className="col-span-2"
+                className="col-span-1"
               />
               <InputLoja
                 label="Preço do Produto"
@@ -100,21 +99,20 @@ function AdicionarProdutos() {
                 icon={BiMoneyWithdraw}
                 register={register}
                 type="number"
-                className="col-span-2"
+                className="col-span-1"
                 min="1"
                 step="0.5"
               />
-            </div>
             <InputLoja
               label="Imagem do Produto"
               nome="imagem"
               icon={MdAddPhotoAlternate}
               register={register}
               type="text"
-              className="col-span-2"
+              className="col-span-1 md:col-span-2"
             />
             <textarea
-              className="w-full h-[200px] bg-bege flex items-start gap-2 p-3 rounded-lg border border-salmao text-roxo font-medium text-base outline-0 resize-none col-span-2"
+              className="w-full h-[200px] bg-bege flex items-start gap-2 p-3 rounded-lg border border-salmao text-roxo font-medium text-base outline-0 resize-none md:col-span-2"
               id="descricao"
               minLength={100}
               placeholder="Descrição do Produto" {...register("descricao")}

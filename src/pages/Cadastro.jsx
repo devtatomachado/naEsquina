@@ -109,7 +109,7 @@ function Cadastro() {
 
   return (
     <div className="bg-[url('/bg_Login.png')] bg-cover bg-center bg-fixed min-h-screen flex items-center justify-center px-4">
-      <div className="bg-white bg-opacity-90 p-6 sm:p-10 rounded-lg shadow-xl w-full max-w-md">
+      <div className="bg-branco bg-opacity-90 p-8 rounded-lg shadow-xl max-w-full md:max-w-sm w-[95%] flex flex-col  py-12">
         <div className="text-center mb-6">
           <img
             src="/logoNaesquina.svg"
@@ -117,29 +117,30 @@ function Cadastro() {
             className="mx-auto h-20 mb-4"
           />
 
-          <div className="flex flex-col sm:flex-row justify-center items-center sm:space-x-6 space-y-2 sm:space-y-0">
+          <div className="flex flex-col gap-3 sm:flex-row justify-center items-center">
             <h2 className="text-roxo font-medium">Você é:</h2>
-            <label className="flex items-center space-x-2">
-              <input
-                type="radio"
-                value="comerciante"
-                {...register("radio")}
-                className="accent-purple-700"
-                required
-              />
-              <span>Comerciante</span>
-            </label>
-
-            <label className="flex items-center space-x-2">
-              <input
-                type="radio"
-                value="pessoa"
-                {...register("radio")}
-                className="accent-purple-700"
-                required
-              />
-              <span>Consumidor</span>
-            </label>
+            <div className="flex gap-3">
+              <label className="flex items-center space-x-2">
+                <input
+                  type="radio"
+                  value="comerciante"
+                  {...register("radio")}
+                  className="accent-roxo"
+                  required
+                />
+                <span>Comerciante</span>
+              </label>
+              <label className="flex items-center space-x-2">
+                <input
+                  type="radio"
+                  value="pessoa"
+                  {...register("radio")}
+                  className="accent-roxo"
+                  required
+                />
+                <span>Consumidor</span>
+              </label>
+            </div>
           </div>
         </div>
 
@@ -151,63 +152,64 @@ function Cadastro() {
                 placeholder="Nome"
                 register={register}
                 name="nome"
-                icon={<MdPerson />}
+                icon={MdPerson}
                 required
+                autoComplete="off"
               />
               <InputCadastro
                 type="email"
                 placeholder="Email"
                 register={register}
                 name="email"
-                icon={<FaEnvelope />}
+                icon={FaEnvelope}
                 required
+                autoComplete="off"
               />
               {telaAtiva === "comerciante" && <InputCadastro
                 type="text"
                 placeholder="CPF/CNPJ"
                 register={register}
                 name="documento"
-                icon={<FaRegIdBadge />}
+                icon={FaRegIdBadge}
                 required
+                autoComplete="off"
               />}
               <InputCadastro
                 type="password"
                 placeholder="Senha"
                 register={register}
                 name="senha"
-                icon={<FaLock />}
+                icon={FaLock}
                 required
+                autoComplete="off"
               />
               <InputCadastro
                 type="password"
                 placeholder="Confirma Senha"
                 register={register}
                 name="confirma"
-                icon={<FaLock />}
+                icon={FaLock}
                 required
+                autoComplete="off"
               />
 
             </>
           )}
 
-          <button
+          {isStoreWatch && <button
             type="submit"
-            className="bg-roxo w-full border border-roxo text-white hover:bg-opacity-20 hover:border-black font-bold py-2 sm:py-3 rounded-xl mt-4 text-sm sm:text-base"
+            className="bg-roxo w-full border border-roxo text-white hover:bg-opacity-20 hover:border-black font-bold py-2 sm:py-3 rounded-xl mt-4 text-sm sm:text-base cursor-pointer"
           >
             Cadastrar
-          </button>
+          </button>}
         </form>
-
-        <div className="relative flex items-center py-5">
-          <div className="flex-grow border-t border-roxo"></div>
-        </div>
-
-        <div className="flex flex-col gap-3">
-          <Link to="/login"
-            className="text-sm sm:text-base text-black underline hover:underline mt-2 block text-center"
+        <div className="flex flex-col gap-3 py-3">
+          <hr className="border-roxo" />
+          {isStoreWatch && <Link to="/login"
+            className="w-full flex justify-center cursor-pointer bg-transparent border border-roxo text-roxo hover:bg-opacity-20 hover:border-black font-bold py-3 rounded-xl"
           >
-            Já tem cadastro? Entre
-          </Link>
+            Entrar
+          </Link>}
           <Link to="/" className="flex items-center justify-center gap-2"><p className="text-sm text-roxo underline underline-offset-2">Voltar para Página Inicial</p></Link>
         </div>
 

@@ -18,7 +18,7 @@ function Pesquisar() {
                 const dados = await resposta.json()
                 const pesquisa = termo.toUpperCase()
                 const dadosFiltrados = dados.filter(loja => (
-                    loja.nome.toUpperCase().includes(pesquisa)
+                    loja.nomeLoja.toUpperCase().includes(pesquisa)
                 ))
                 setResultadoLoja(dadosFiltrados)
             } catch (e) {
