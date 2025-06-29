@@ -6,7 +6,7 @@ import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import AdicionarProdutos from "./pages/AdicionarProdutos.jsx";
 import Loja from "./pages/Loja.jsx";
-import TesteCadastro from "./pages/TesteCadastro.jsx";
+import Cadastro from "./pages/Cadastro.jsx";
 import Pesquisar from "./pages/Pesquisar.jsx";
 import EditarLoja from "./pages/EditarLoja.jsx";
 import EditarProduto from "./pages/EditarProduto.jsx";
@@ -14,7 +14,7 @@ import EditarProduto from "./pages/EditarProduto.jsx";
 const rotas = createBrowserRouter([
   { path: "/", element: <Home /> },
   { path: "/login", element: <Login /> },
-  { path: "/cadastro", element: <TesteCadastro /> },
+  { path: "/cadastro", element: <Cadastro /> },
   { path: "/adicionar", element: <AdicionarProdutos /> },
   { path: "/loja/:lojaID", element: <Loja /> },
   { path: "/pesquisar", element: <Pesquisar /> },

@@ -158,13 +158,12 @@ function Loja() {
     return (
         <>
             <Header />
-            <main className="flex md:flex-row flex-col">
-                <div className="bg-salmao/60 py-12 px-6 flex flex-col gap-12 flex-1/6">
-
+            <main className="flex md:flex-row flex-col ">
+                <div className="bg-salmao/60 py-12 px-6 flex flex-col gap-12 flex-2/8">
                     <div className="flex flex-col justify-center items-center gap-10">
-                        <img src={loja.logo} alt="Logo loja" className="rounded-full w-44 h-44" />
+                        <img src={loja.logo} alt="Logo loja" className="rounded-full w-44 h-44 object-cover" />
                         <div className="flex flex-col gap-2">
-                            <h2 className=" text-2xl font-bold text-roxo">{loja.nome}</h2>
+                            <h2 className=" text-2xl font-bold text-roxo text-center">{loja.nome}</h2>
                             <ul className="w-full flex gap-2 justify-center">
                                 <li className="text-2xl text-preto hover:text-roxo duration-500 ease-in"><a href=""><FaInstagram /></a></li>
                                 <li className="text-2xl text-preto hover:text-roxo duration-500 ease-in"><a href=""><FaFacebookSquare /></a></li>
@@ -180,20 +179,20 @@ function Loja() {
                                 </button>
                             )}
                         </div>
-                        <p className="text-justify text-sm">{loja.bio}</p>
+                        <p className="text-justify text-base">{loja.bio}</p>
                     </div>
                     <ul className="flex items-center md:items-start flex-col  gap-3">
                         <li className="flex items-center gap-2">
                             <FaMapMarkerAlt className="text-xl text-roxo" />
-                            <span className="text-base text-preto font-semibold">{loja.endereco}</span>
+                            <span className="text-sm text-preto font-semibold">{loja.endereco}</span>
                         </li>
                         <li className="flex items-center gap-2">
                             <FaEnvelope className="text-xl text-roxo" />
-                            <span className="text-base text-preto font-semibold">{loja.email}</span>
+                            <span className="text-sm text-preto font-semibold">{loja.email}</span>
                         </li>
                         <li className="flex items-center gap-2">
                             <FaWhatsapp className="text-xl text-roxo" />
-                            <span className="text-base text-preto font-semibold">{loja.telefone}</span>
+                            <span className="text-sm text-preto font-semibold">{loja.telefone}</span>
                         </li>
                     </ul>
                     <a
@@ -218,8 +217,8 @@ function Loja() {
             >
                 {produtoSelecionado && (
                     <div className="flex lg:flex-row flex-col gap-4">
-                        <img src={produtoSelecionado.imagem} alt={produtoSelecionado.nome} className="w-full md:w-1/2 mb-4" />
-                        <div className="flex flex-col gap-8">
+                        <img src={produtoSelecionado.imagem} alt={produtoSelecionado.nome} className="w-full md:w-1/2" />
+                        <div className="flex flex-col gap-8 justify-between">
                             <div>
                                 <h2 className="text-4xl text-roxo font-bold capitalize">{produtoSelecionado.nome}</h2>
                             </div>

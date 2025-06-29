@@ -3,6 +3,7 @@ import { BsEnvelope } from "react-icons/bs";
 import { FaArrowLeft } from "react-icons/fa6";
 import { MdOutlineLock } from "react-icons/md";
 import { Link, useNavigate } from 'react-router-dom';
+import Swal from "sweetalert2";
 
 function Login() {
     const { register, handleSubmit } = useForm();
@@ -28,7 +29,7 @@ function Login() {
             }
             navigate("/")
         } else {
-            alert("email ou senha inválidos")
+            Swal.fire({text: "Email ou senha inválidos", icon:"warning"})
         }
     }
 
@@ -77,7 +78,7 @@ function Login() {
                         >
                             Cadastre-se
                         </Link>
-                        <Link to="/" className="flex items-center justify-center gap-2"><p className="text-sm text-roxo underline underline-offset-2">Voltar</p></Link>
+                        <Link to="/" className="flex items-center justify-center gap-2"><p className="text-sm text-roxo underline underline-offset-2">Voltar para Página Inicial</p></Link>
                     </div>
                 </form>
 
