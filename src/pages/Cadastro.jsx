@@ -18,9 +18,6 @@ function Cadastro() {
 
   let isStoreWatch = watch("radio")
 
-  // useEffect(() => {
-  //   setTelaAtiva("comerciante")
-  // })
 
   useEffect(() => {
     setTelaAtiva(isStoreWatch)
@@ -43,14 +40,15 @@ function Cadastro() {
 
     if (isStoreWatch === "comerciante") {
       isStore = true
-    } else if(isStoreWatch === "pessoa") {
+    } else if (isStoreWatch === "pessoa") {
       isStore = false
     } else {
-      Swal.fire({text:"Preencha o formulário corretamente!", icon:"error"})
+      Swal.fire({ text: "Preencha o formulário corretamente!", icon: "error" })
       return
     }
 
     try {
+      //Cria o usuario
       const resposta = await fetch("http://localhost:3000/usuarios", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -66,10 +64,11 @@ function Cadastro() {
       });
       if (!resposta.ok) throw new Error("Erro ao cadastrar");
 
-      const usuarioCriado = await resposta.json
+      const usuarioCriado = await resposta.json()
 
       if (isStoreWatch === "comerciante") {
-        await fetch("http://localhost:3000/lojas", {
+        //Cria a Loja
+        const lojaResp = await fetch("http://localhost:3000/lojas", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -81,7 +80,20 @@ function Cadastro() {
             produtos: []
           })
         })
+        if (!lojaResp.ok) throw new Error("Erro ao criar a loja")
+        const lojaCriada = await lojaResp.json()
+
+        //Atualiza o usuario com o Id da Loja 
+        //Usei PATCH pq o PUT espera o corpo inteiro. 
+        await fetch(`http://localhost:3000/usuarios/${usuarioCriado.id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            lojaId: lojaCriada.id
+          })
+        })
       }
+
 
       if (isStore) {
         Swal.fire({ title: "Comerciante cadastrado com sucesso!", text: "Agora edite sua loja para concluir o cadastro", icon: "success" })
@@ -90,7 +102,6 @@ function Cadastro() {
       }
 
       navigate("/login")
-
     } catch (erro) {
       console.log(`Erro: ${erro.message}`);
     }

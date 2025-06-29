@@ -6,7 +6,7 @@ function CardLojas({ loja }) {
             <div className="flex gap-3 p-6">
                 <img src={loja.logo} alt="" className='w-[9rem] h-[9rem] rounded-xl border border-salmao object-cover' />
                 <div className='flex items-center md:items-start md:flex-col px-2'>
-                    <h3 className='text-roxo text-xl font-bold'>{loja.nome}</h3>
+                    <h3 className='text-roxo text-xl font-bold'>{loja.nomeLoja}</h3>
                     <p className='hidden md:block line-clamp-1 text-preto text-sm '><span className="line-clamp-5">{loja.bio}</span></p>
                 </div>
             </div>

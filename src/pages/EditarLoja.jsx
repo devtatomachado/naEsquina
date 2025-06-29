@@ -31,7 +31,7 @@ function EditarLoja() {
     }, [])
 
     async function salvarAlteracoes(data) {
-        if (!data.nome || !data.endereco || !data.logo || !data.telefone || !data.email || !data.bio) {
+        if (!data.nomeLoja || !data.endereco || !data.logo || !data.telefone || !data.email || !data.bio) {
         Swal.fire("Atenção", "Preencha todos os campos obrigatórios!", "warning");
         return;
     }
@@ -76,7 +76,7 @@ function EditarLoja() {
                     <form onSubmit={handleSubmit(salvarAlteracoes)} className="w-[60%] grid grid-cols-2 gap-y-4 gap-x-8">
                         <InputLoja
                             label="Nome da Loja"
-                            nome="nome"
+                            nome="nomeLoja"
                             icon={FaStore}
                             register={register}
                             type="text"
@@ -117,7 +117,7 @@ function EditarLoja() {
                             id="bio"
                             {...register("bio")}
                             placeholder="Descrição da Loja"
-                            maxLength={150}
+                            minLength={150}
                             className="w-full h-[200px] bg-bege flex items-start gap-2 p-3 rounded-lg border border-salmao text-roxo font-medium text-base outline-0 resize-none col-span-2"
                         />
                         <div className='flex flex-col col-span-2 md:flex-row md:gap-9 mt-[0.62rem] gap-[0.62rem] mb-[2.5rem]'>

@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 function Menu () {
     const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"))
     console.log(usuarioLogado.lojaId)
-
+    
     return (
         <>
         <nav>

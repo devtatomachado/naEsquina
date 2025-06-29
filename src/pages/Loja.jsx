@@ -44,7 +44,7 @@ function Loja() {
 
     useEffect(() => {
         setFavoritosIds(JSON.parse(localStorage.getItem("favoritosIds")) || []);
-    }, [usuarioLogado]);
+    }, []);
 
     async function deleteProduto(produtoId) {
         try {
@@ -78,10 +78,6 @@ function Loja() {
                     icon: "success"
                 });
             }
-
-
-
-
         } catch (e) {
             Swal.fire("Erro", e.message, "error")
         }
