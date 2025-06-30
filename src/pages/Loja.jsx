@@ -7,6 +7,7 @@ import { IoLogoWhatsapp } from "react-icons/io";
 import Modal from "react-modal";
 import Swal from "sweetalert2";
 import { BiSolidEdit } from "react-icons/bi";
+import CardProduto from "../components/CardProduto";
 
 Modal.setAppElement('#root');
 
@@ -36,9 +37,9 @@ function Loja() {
                 setLoja(dados)
 
                 if (!dados.nomeLoja || dados.nomeLoja.trim() === "" || !dados.bio || dados.bio.trim() === "") {
-                await Swal.fire("Complete sua loja!", "Preencha as informações da loja para continuar.", "info");
-                navigate("/editarloja");
-            }
+                    await Swal.fire("Complete sua loja!", "Preencha as informações da loja para continuar.", "info");
+                    navigate("/editarloja");
+                }
             } catch (e) {
                 console.error('Erro: ', e.message)
             }
@@ -87,41 +88,19 @@ function Loja() {
         }
     }
 
-    
+
 
     const listaProdutos = loja.produtos ? loja.produtos.map(produto => (
-        <div className="flex flex-col bg-salmao/50 w-[300px] h-[592px] rounded-2xl overflow-clip shadow-sm shadow-preto/50">
-            <div className="h-[300px] overflow-clip flex items-center">
-                <img src={produto.imagem} alt="" className="w-[300px] h-[300px]" />
-            </div>
-            <div className="p-4 h-full flex flex-col justify-between gap-4 ">
-                <h3 className="w-full text-xl text-roxo font-bold capitalize">{produto.nome.length > 26 ? produto.nome.slice(0,26) + "..." : produto.nome}</h3>
-                <p className="text-sm text-justify text-preto h-full wrap-break-word">{produto.descricao.length > 110 ? produto.descricao.slice(0, 110) + "..." : produto.descricao}</p>
-                <div className="w-full flex justify-between items-center capitalize ">
-                    {(produto.disponibilidade === "Em estoque") ? <p className="text-roxo text-lg font-semibold">{Number(produto.valor).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p> : null}
-                    <p className="text-roxo font-semibold bg-branco py-1 px-2 rounded-full">{produto.disponibilidade}</p>
-                </div>
-                <button onClick={() => openProduto(produto)} className="flex justify-end gap-1 items-center text-salmao cursor-pointer"><FaPlusCircle className="text-roxo" /><span className="text-preto font-semibold">Ver mais</span> </button>
-            </div>
-            {isDono && (
-                <div className="flex justify-between items-center">
-                    <Link
-                        to="/editarproduto"
-                        className="flex justify-center items-center w-[50%] bg-roxo p-2"
-                        onClick={() => {
-                            localStorage.setItem("produtoEditando", JSON.stringify(produto));
-                            localStorage.setItem("lojaId", loja.id);
-                        }}
-                    >
-                        <BiSolidEdit className="text-branco text-base" />
-                    </Link>
-                    <button onClick={() => deleteProduto(produto.id)} className="flex justify-center items-center w-[50%] bg-red-400 p-2 cursor-pointer">
-                        <FaTrash className="text-branco text-base" />
-                    </button>
-                </div>
-            )}
-        </div>
-    )) : null;
+        <CardProduto
+            key={produto.id}
+            produto={produto}
+            isDono={isDono}
+            openProduto={openProduto}
+            deleteProduto={deleteProduto}
+            loja={loja}
+        />
+    ))
+        : null;
 
 
 
@@ -176,7 +155,7 @@ function Loja() {
                                     className="flex items-center gap-2 cursor-pointer hover:scale-110 duration-300 ease-in"
                                     onClick={favoritarLoja}
                                 >
-                                    {isFavorito ? <FaStar className="text-amber-500"/> : <FaRegStar className="text-roxo"/>} <p className="text-roxo font-semibold">{isFavorito ? "Favorito" : "Favoritar"}</p>
+                                    {isFavorito ? <FaStar className="text-amber-500" /> : <FaRegStar className="text-roxo" />} <p className="text-roxo font-semibold">{isFavorito ? "Favorito" : "Favoritar"}</p>
                                 </button>
                             )}
                         </div>
@@ -206,7 +185,7 @@ function Loja() {
 
                 </div>
                 <div className="flex-5/6 grid grid-cols-1 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 gap-y-10 py-12 px-6 justify-items-center">
-                    {listaProdutos}
+                    {!listaProdutos || listaProdutos.length === 0 ? <p className="text-xl text-roxo">Não há nenhum produto cadastrado..</p> : listaProdutos}
                 </div>
             </main>
             <Modal
