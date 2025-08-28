@@ -46,30 +46,30 @@ Antes de começar, você precisará ter instalado:
 ## 🚀 Como Rodar o Projeto
 
 Clone o repositório:
-\`\`\`bash
+```
 git clone https://github.com/devtatomachado/NaEsquina.git
-\`\`\`
+```
 
 Acesse a pasta do projeto:
-\`\`\`bash
+```
 cd NaEsquina
-\`\`\`
+```
 
 Instale as dependências:
-\`\`\`bash
+```
 npm install
-\`\`\`
+```
 
 Rode o projeto:
-\`\`\`bash
+```
 npm run dev
-\`\`\`
+```
 
 Se quiser rodar a **API Fake** (JSON-Server):
-\`\`\`bash
+```
 # Em outro terminal
 npx json-server db.json
-\`\`\`
+```
 
 ---
 
